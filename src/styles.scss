@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Import functions, variables and mixins that are neede by other bootstrap files
+*/
+@import "variables.scss";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/grid";
+
+// Import Bootsrap Roboot
+@import "~bootstrap/scss/reboot";
+
+@import "reset.scss";
+
+body {
+    background-color: #eeeeee;
+}
+
+
