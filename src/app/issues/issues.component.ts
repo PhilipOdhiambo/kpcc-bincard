@@ -124,8 +124,10 @@ export class IssuesComponent implements OnInit,AfterViewInit {
     this.formDetails.push(
       this.fb.group(
         {
+          item_id: [drug.id],
+          itemCode: [drug.code],
           itemDesc: [drug.description],
-          itemPrice: [drug.cost],
+          itemPrice: [parseFloat(drug.cost).toFixed(2)],
           itemQty: ['', Validators.required],
           lineTotal: [null]
         }

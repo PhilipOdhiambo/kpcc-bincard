@@ -1,12 +1,10 @@
-
-// Title: AddReceipt Componet
-// Purpose: To enable adding of a new receipt to the database
+// Title: RetrievalsComponent
+// Purpose: Add retrievals from buffer
 
 import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit,
   Renderer2 } from '@angular/core';
 import { FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { Router,ActivatedRoute} from '@angular/router';
-import { Departments } from '../shared/department.Data';
 import { DRUGS } from '../shared/drug.Data';
 import { Drug } from '../shared/types'
 import * as moment from 'moment'; // monent is a library to handle time
@@ -14,11 +12,11 @@ import { BincardService } from '../shared/bincard.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'receipts',
-  templateUrl: './receipts.component.html',
-  styleUrls: ['./receipts.component.css']
+  selector: 'retrievals',
+  templateUrl: './retrievals.component.html',
+  styleUrls: ['./retrievals.component.css']
 })
-export class ReceiptsComponent implements OnInit,AfterViewInit  {
+export class RetrievalsComponent implements OnInit,AfterViewInit {
 
   @ViewChild('dept') dept:ElementRef;
   @ViewChild('drugSearch') drugSearch:ElementRef;
@@ -36,24 +34,19 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
     private binService: BincardService
   ) { }
 
-    /* Declare and Initialize reactive form */
-    myForm = this.fb.group({
-      receiptFrom: ['', Validators.required],
-      receiptRef: ['', Validators.required],
-      receiptDate: [ moment(new Date()).format('YYYY-MM-DD'),Validators.required],
-      receiptDetails: this.fb.array([])
-    });
+  /* Declare and Initialize reactive form */
+  myForm = this.fb.group({
+    receiptDate: [ moment(new Date()).format('YYYY-MM-DD'),Validators.required],
+    receiptDetails: this.fb.array([])
+  });
 
   /* Geters */
-  get formRef() {
-    return this.myForm.controls.receiptRef as FormControl;
-  }
-  get sourceName() {
-    return this.myForm.controls.receiptFrom as FormControl;
-  }
-
   get formDetails () {
     return this.myForm.get('receiptDetails') as FormArray;
+  }
+
+  get dateRef() {
+    return this.myForm.controls.receiptDate as FormControl
   }
 
   get formDetailTotal () {
@@ -61,7 +54,7 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
       return acc + curr.get('lineTotal').value || 0;
     },0);
   }
-  
+
   ngOnInit(): void { 
 
   }
@@ -78,48 +71,30 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
   }
   ngOnDestroy(){
     this.qtySubsc.unsubscribe;
-  } 
+  }
+
+    // Filter Drugs and add the selected drug
+    filterDrugs(str:string) {
+      this.filteredDrugs = DRUGS.filter(drug => {
+        const regex = new RegExp(str,'i');
+        return drug.description.search(regex) > -1;
+      });
+    }
   
-  // Filter Departments and add the selected department
-  filterDepartments(str:string) {
-    this.filteredDepartments = Departments.filter(department => {
-      const regex = new RegExp(str,'i');
-      return department.search(regex) > -1;
-    });
-  }
+    onDrugclickOutside() {
+      this.filteredDrugs = [];
+    }
+  
+    // Cancel page
+    onCancel() {
+      this.router.navigate(['../'], {relativeTo: this.activeRoute});
+    }
+    // When date is picked
+    onDateUpdate(date: string){
+      this.myForm.get('receiptDate').setValue(date);
+    }
 
-  // When a department is selected from the dropdown
-  onDeptClick(d) {
-    this.myForm.get('receiptFrom').setValue(d);
-    this.filteredDepartments = [];
-  }
-  onDeptclickOutside() {
-    this.filteredDepartments = [];
-  }
-
-
-  // Filter Drugs and add the selected drug
-  filterDrugs(str:string) {
-    this.filteredDrugs = DRUGS.filter(drug => {
-      const regex = new RegExp(str,'i');
-      return drug.description.search(regex) > -1;
-    });
-  }
-
-  onDrugclickOutside() {
-    this.filteredDrugs = [];
-  }
-
-  // Cancel page
-  onCancel() {
-    this.router.navigate(['../'], {relativeTo: this.activeRoute});
-  }
-  // When date is picked
-  onDateUpdate(date: string){
-    this.myForm.get('receiptDate').setValue(date);
-  }
-
-  // Add drugs to the detail section of the form
+      // Add drugs to the detail section of the form
   onDrugClick(drug: Drug, drugSearch:HTMLInputElement) {
     this.formDetails.push(
       this.fb.group(
@@ -155,30 +130,29 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
     this.formDetails.removeAt(index);
   }
 
-  // Clear form
-  clearForm() {
-    if(confirm("This action will Delete your work")) {
-      this.myForm.reset();
-    } else {
-      return
-    }    
-  }
+    // Clear form
+    clearForm() {
+      if(confirm("This action will Delete your work")) {
+        this.myForm.reset();
+      } else {
+        return
+      }    
+    }
+  
+    // Saving form information
+     saveForm() {
+  
+      this.binService.retrievalRef.doc('' + this.dateRef.value).set(this.myForm.value)
+      .then(() => {
+  
+        alert('Operation Successful..');
+  
+        /* I choose to clear individual controls instead of using an easier method "form.reset()"
+        because this method messes up the tabbing functionality for the next data entry */
+  
+        this.myForm.get('receiptDate').setValue('');
+        this.formDetails.controls.splice(0);
+      });   
+    }
 
-  // Saving form information
-   saveForm() {
-
-    this.binService.receiptColRef.doc('' + this.formRef.value).set(this.myForm.value)
-    .then(() => {
-
-      alert('Operation Successful..');
-
-      /* I choose to clear individual controls instead of using an easier method "form.reset()"
-      because this method messes up the tabbing functionality for the next data entry */
-
-      this.myForm.get('receiptFrom').setValue('');
-      this.myForm.get('receiptRef').setValue('');
-      this.myForm.get('receiptDate').setValue('');
-      this.formDetails.controls.splice(0);
-    });   
-  }
 }

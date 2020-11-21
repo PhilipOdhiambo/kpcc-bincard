@@ -27,6 +27,11 @@ export class BincardService {
     return this.db.collection('issues');
   }
 
+  // Ref to retrieval collection
+  get retrievalRef() {
+    return this.db.collection('retrievals')
+  }
+
   addItem(item:Drug) {
     this.db.collection('items').add(item);
   }

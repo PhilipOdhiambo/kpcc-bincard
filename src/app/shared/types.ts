@@ -1,10 +1,11 @@
 
 // Drug
 export interface Drug {
+    id: string,
     code?:string,
     description:string,
-    cost:number,
-    price:number
+    cost:string,
+    price:string
 }
 
 /* Receipt and Issue types */
@@ -29,6 +30,8 @@ export interface Issue {
 
 /* Transaction Detail */
 export interface TransDetail {
+    item_id: string,
+    itemCode: string,
     itemDesc: string,
     itemPrice: number,
     itemQty: number,

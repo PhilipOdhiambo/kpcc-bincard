@@ -21,6 +21,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   receipts = [];
   issues = [];
+  retrievals = []
 
   filteredReceipts: Array<Receipt> = [];
   filteredIssues: Array<Issue> = [];
@@ -64,10 +65,12 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
             transDate: doc.receiptDate,
             transRef: doc.receiptRef,
             deptName: doc.receiptFrom,
+            itemId: detail.item_id,
+            itemCode: detail.itemCode,
             itemDesc: detail.itemDesc,
             itemCost: detail.itemPrice,
             itemQty: detail.itemQty,
-            lineTotal: detail.lineTotal.toFixed(2),
+            lineTotal: detail.lineTotal,
           });
         })
       })
@@ -87,10 +90,12 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
             transDate: doc.issueDate,
             transRef: doc.issueRef,
             deptName: doc.issueTo,
+            itemId: detail.item_id,
+            itemCode: detail.itemCode,
             itemDesc: detail.itemDesc,
             itemCost: detail.itemPrice,
             itemQty: detail.itemQty,
-            lineTotal: detail.lineTotal.toFixed(2),
+            lineTotal: detail.lineTotal,
           });
         })
       })
@@ -101,6 +106,10 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     });
 
+    // Read retrievals from the server
+    this.binService.retrievalRef.valueChanges().subscribe(e => {
+      this.retrievals = e
+    })
   }
 
   ngAfterViewInit() {
@@ -114,14 +123,12 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
             return  (receipt.transDate >= start && receipt.transDate <= this.getEndDate)
           })
         }
-
         if (this.getReportType === 'issues') {
           this.reportToShow = this.issues.filter(issue => {
             return issue.transDate >= start && issue.transDate <= this.getEndDate;
           })
         }
       }
-
     });
 
     /* Set subscription to update view when end date is set */
@@ -156,6 +163,30 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
           this.reportToShow = this.issues.filter(issue => {
             return issue.transDate >= this.getStartDate && issue.transDate <= this.getEndDate;
           })
+        }
+        if (reportType === 'retrievals') {
+          let temp = []
+          this.retrievals.forEach(retrieval => {
+            if (retrieval.receiptDate >= this.getStartDate && retrieval.receiptDate <= this.getEndDate) {
+              retrieval.receiptDetails.forEach(detail => {
+                
+                temp.push({
+
+                  transDate: retrieval.receiptDate,
+                  transRef: 'N/A',
+                  deptName: 'N/A',
+                  itemId: detail.item_id,
+                  itemCode: detail.itemCode,
+                  itemDesc: detail.itemDesc,
+                  itemCost: detail.itemPrice,
+                  itemQty: detail.itemQty,
+                  lineTotal: detail.lineTotal,
+                })
+              })
+            }
+
+          })
+          this.reportToShow = temp 
         }
       }
     });
@@ -201,7 +232,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
     let wkBookName;
 
     if (this.getReportType === 'receipts') {
-      header = [{ date: 'Date', ref: 'S11 No.', type: 'Department(From)', item: 'Item',
+      header = [{ date: 'Date', ref: 'S11 No.', type: 'Department(From)', id: 'item#', code: 'code', item: 'Item',
         cost: 'Cost', quantity: 'Quantity', total: 'Total' }];
 
         sheetName = 'receipts';
@@ -210,11 +241,16 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (this.getReportType === 'issues') {
-      header = [{ date: 'Date', ref: 'S11 No.', type: 'Department(To)', item: 'Item',
+      header = [{ date: 'Date', ref: 'S11 No.', type: 'Department(To)', id: 'item#', code: 'code', item: 'Item',
         cost: 'Cost', quantity: 'Quantity', total: 'Total' }]
-
         sheetName = 'issues';
         wkBookName = 'issues';
+    }
+    if (this.getReportType === 'retrievals') {
+      header = [{ date: 'Date', ref: 'S11 No.', type: 'Department(To)', id: 'item#', code: 'code', item: 'Item',
+        cost: 'Cost', quantity: 'Quantity', total: 'Total' }]
+        sheetName = 'retrievals';
+        wkBookName = 'retrievals';
     }
 
     // Create sheet with appropriate header

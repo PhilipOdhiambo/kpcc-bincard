@@ -21,6 +21,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { AppRoutingModule } from './app.routingModule';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
 import { ReportsComponent } from './reports/reports.component';
+import { RetrievalsComponent } from './retrievals/retrievals.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ReportsComponent } from './reports/reports.component';
     IssuesComponent,
     AutoFocusDirective,
     ReportsComponent,
+    RetrievalsComponent,
   ],
   imports: [
     BrowserModule,

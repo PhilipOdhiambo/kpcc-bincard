@@ -33,8 +33,8 @@
     .item,.dept {
         width: 10.5rem;
     }
-    .cost,.qty {
-        width: 5rem;
+    .cost,.qty,.total,.id,.code {
+        width: 4rem;
     }
     .total {
         width: 5rem;
@@ -44,7 +44,7 @@
 
 <div>
     <button class=" btn cls-btn" (click)="onCancel()">&times;</button>
-    <h5>Receipt and Issue Report</h5>
+    <h5>Receipt, Issue And Buffer Retrievals Report</h5>
     <div class="report-head">
         <div class="dates">
             <label for="dates-start">Start Date:
@@ -61,6 +61,7 @@
                 <select #choice name="" id="" [formControl]="reportType">
                     <option value="receipts">Receipts</option>
                     <option value="issues">Issues</option>
+                    <option value="retrievals">Retrievals</option>
                 </select>
             </label>
         </div>
@@ -75,6 +76,8 @@
             <span class="date">Date</span>
             <span class="ref"> S11 No.</span>
             <span class="dept"> Department(From/To)</span>
+            <span class="id"> Item#</span>
+            <span class="code"> Item Code</span>
             <span class="item">Item Name</span>
             <span class="qty"> Quantity </span>
             <span class="cost"> Cost </span>
@@ -85,6 +88,8 @@
                 <span><input class="date" readonly [value]="each.transDate"></span>
                 <span><input class="ref" readonly [value]="each.transRef"></span>
                 <span><input class="dept" readonly [value]="each.deptName"></span>
+                <span><input class="id" readonly [value]="each.itemId"></span>
+                <span><input class="code" readonly [value]="each.itemCode"></span>
                 <span><input class="item" readonly [value]="each.itemDesc"></span>
                 <span><input class="qty" readonly [value]="each.itemQty"></span>
                 <span><input class="cost" readonly [value]="each.itemCost"></span>
