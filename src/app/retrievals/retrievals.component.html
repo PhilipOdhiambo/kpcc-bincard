@@ -73,6 +73,9 @@
         border: 2px solid red;
     }
 </style>
+<div *ngFor="let n of ns | async">
+    {{n | json}}
+</div>
 
 <div class="container">
     <button class=" btn cls-btn" (click)="onCancel()">&times;</button>

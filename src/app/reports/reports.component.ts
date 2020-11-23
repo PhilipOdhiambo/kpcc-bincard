@@ -22,6 +22,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   receipts = [];
   issues = [];
   retrievals = []
+  downloadLink: string
 
   filteredReceipts: Array<Receipt> = [];
   filteredIssues: Array<Issue> = [];
@@ -263,7 +264,10 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
     XLSX.utils.book_append_sheet(wb, ws, sheetName);
 
     // Write the workbook to file with appropriate name
-    XLSX.writeFile(wb, wkBookName + '.xlsx');
+    //XLSX.writeFile(wb, wkBookName + '.xlsx');
+    const blob = new Blob([XLSX.stream.to_html(wb)])
+    this.downloadLink = URL.createObjectURL(blob)
+    window.open(this.downloadLink);
     
   }
 

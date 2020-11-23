@@ -13,7 +13,11 @@ import { Drug} from './types';
 })
 export class BincardService {
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore) {
+    this.db.collection('retrievals').valueChanges().subscribe(e => {
+      console.log(e)
+    })
+   }
 
   // Create Operations
 

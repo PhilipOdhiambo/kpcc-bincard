@@ -26,6 +26,8 @@ export class RetrievalsComponent implements OnInit,AfterViewInit {
   private qtySubsc: Subscription = new Subscription();
   filteredDepartments:string[] = [];
   filteredDrugs: Array<Drug> = [];
+  ns
+
 
   constructor(
     private fb: FormBuilder,
@@ -56,7 +58,6 @@ export class RetrievalsComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void { 
-
   }
   
   ngAfterViewInit() {
