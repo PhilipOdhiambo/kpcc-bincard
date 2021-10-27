@@ -6,7 +6,7 @@
 
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Drug} from './types';
+import { Drug} from '../models/types';
 
 @Injectable({
   providedIn: 'root'

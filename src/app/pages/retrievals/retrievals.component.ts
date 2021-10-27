@@ -5,10 +5,10 @@ import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList, Afte
   Renderer2 } from '@angular/core';
 import { FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { Router,ActivatedRoute} from '@angular/router';
-import { DRUGS } from '../shared/drug.Data';
-import { Drug } from '../shared/types'
+import { DRUGS } from '../../shared/drug.Data';
+import { Drug } from '../../models/types'
 import * as moment from 'moment'; // monent is a library to handle time
-import { BincardService } from '../shared/bincard.service';
+import { BincardService } from '../../service/bincard.service';
 import { Subscription } from 'rxjs';
 
 @Component({

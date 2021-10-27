@@ -12,16 +12,16 @@ import { AppComponent } from './app.component';
 // Components
 import { HomePageComponent } from './home-page/home-page.component';
 import { NavComponent } from './nav/nav.component';
-import { ReceiptsComponent } from './receipts/receipts.component';
-import { IssuesComponent } from './issues/issues.component';
+import { ReceiptsComponent } from './pages/receipts/receipts.component';
+import { IssuesComponent } from './pages/issues/issues.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ClickOutsideModule } from 'ng-click-outside';
 
 import { AppRoutingModule } from './app.routingModule';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
-import { ReportsComponent } from './reports/reports.component';
-import { RetrievalsComponent } from './retrievals/retrievals.component';
+import { ReportsComponent } from './pages/reports/reports.component';
+import { RetrievalsComponent } from './pages/retrievals/retrievals.component';
 
 @NgModule({
   declarations: [

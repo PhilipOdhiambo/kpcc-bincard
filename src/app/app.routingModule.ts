@@ -5,10 +5,10 @@ import { Routes, RouterModule } from '@angular/router';
 // Component Modules
 // Kpcc-bincard components
 import { HomePageComponent } from './home-page/home-page.component';
-import { ReceiptsComponent } from './receipts/receipts.component';
-import { IssuesComponent } from './issues/issues.component';
-import { RetrievalsComponent } from './retrievals/retrievals.component';
-import { ReportsComponent } from './reports/reports.component';
+import { ReceiptsComponent } from './pages/receipts/receipts.component';
+import { IssuesComponent } from './pages/issues/issues.component';
+import { RetrievalsComponent } from './pages/retrievals/retrievals.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 const routes:Routes = [   
     {path:'home', component: HomePageComponent },

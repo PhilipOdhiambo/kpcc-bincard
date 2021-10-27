@@ -1,4 +1,4 @@
-import { Drug } from './types'
+import { Drug } from '../models/types'
 
 export const DRUGS:Drug[] = [
     
