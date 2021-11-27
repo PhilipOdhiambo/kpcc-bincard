@@ -1,0 +1,85 @@
+@import 'src/scss/color-palatte.scss';
+
+.edit-department {
+    background-color:rgba(0, 0, 0, 0.301);
+    position: absolute;
+    display: flex;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+
+   
+}
+.form-container {
+    margin: auto;
+    background-color: white;
+    padding: 2px;
+    
+    .close {
+        height: 2rem;
+        width: 2rem;
+        float: right;
+        margin: 10px;
+        background-color: red;
+        mask: url(/assets/icons/close.svg) no-repeat center;
+    }
+    
+}
+
+form {
+    
+    padding: 2rem;
+    background-color: antiquewhite;
+
+    .custom-field {
+        display: block;
+        position: relative;
+        font-size: 15px;
+        padding-top: 20px;
+        margin-bottom: 2rem 0;
+        cursor: pointer;
+
+        .place-holder {
+            position: absolute;
+            cursor: pointer;
+            left: 12px;
+            top:calc(50% + 10px);
+            transform: translateY(-50%);
+            transition:
+                top 0.5s ease,
+                top 0.3s ease,
+                top 0.3s ease;
+            color: green;
+
+        }
+
+        input { 
+            border: none;
+            outline: none;
+            padding: 12px;
+            border-radius: 3px;
+            width: 250px;
+            cursor: pointer;
+            background-color: yellow;
+
+            &:focus + .place-holder, &:valid + .place-holder {
+                top: 10px;
+            }
+        }
+
+    }
+
+
+    .submit {
+        margin-top: 1.5rem;
+        text-align: center;
+        .btn {
+            border: 2px solid $primary;
+            border-radius: 5px;
+            color: $primary;
+            font-size: 24px;
+        }
+    }
+
+}

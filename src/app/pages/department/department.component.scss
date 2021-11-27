@@ -1,0 +1,119 @@
+
+@import 'src/scss/color-palatte.scss';
+
+.component {
+    width: 80vw;
+    margin: 0 auto;
+    margin-top: 3rem;
+    background: $bg;
+
+    .logo {
+        display: inline-block;
+        width: 21px;
+        height: 21px;
+        margin: 5px !important;
+        background-color:$primary;
+        mask: url(/assets/bars.svg) no-repeat center;
+    }
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5px;
+
+    &__left {
+        display: flex;
+    }
+
+    button {
+        display: flex;
+        align-items: center;
+        background-color: $primary;
+        padding: .5em .5em;
+        color: $bg;
+        border-radius: 6px;
+        border-style: none;
+        span {
+            display: inline-block;
+            width: 2em;
+            height: 2em;
+            background-color: $bg;
+            mask: url(/assets/add.svg) no-repeat center;
+        }
+    }
+    
+}
+
+.table {
+    padding-left: 1rem;
+    padding-bottom: 50px;
+    &__content {
+        border-collapse: collapse;
+        font-size: .9em;
+        min-width: 400px;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 10px  rebeccapurple;
+
+        th, td {
+            padding: 12px 15px;
+        }
+
+        thead tr {
+            background-color: $primary;
+            color: $bg;
+            text-align: left;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid $stroke;
+            &:nth-of-type(even) {
+                background-color: $stripes;
+            }
+
+            &:last-of-type {
+                border-bottom: 2px solid $primary;
+            }
+
+            &.active {
+                background-color: $stripes;
+                color: $primary;
+            }
+
+            .coln4 {
+                span {
+                    display: inline-block;
+                    width: 2em;
+                    height: 2em;
+                    margin: 0 .5em;
+                    padding: 2px;
+                }
+
+                span:hover {
+                    background-color: blue;
+                    cursor: pointer;
+                }
+                span.edit {
+                    mask: url(/assets/icons/edit.svg) no-repeat center;
+                    background-color: $icon;
+                    &:hover {
+                        background-color: $positive;
+                    }
+
+                }
+                span.delete {
+                    mask: url(/assets/icons/delete.svg) no-repeat center;
+                    background-color: $icon;
+                    &:hover {
+                        background-color: $negative;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+

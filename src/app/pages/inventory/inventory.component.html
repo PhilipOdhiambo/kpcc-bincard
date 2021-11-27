@@ -1,0 +1,56 @@
+<div class="page">
+    <div class="container">
+        <h2 class="title"> Inventory List</h2>
+        <div class="row">
+
+            <div class="col list">
+                <div class="list__header">
+                    <span class="icon"></span>
+                    <input type="text" placeholder="Filter inventory">
+                    <button (click)="newInventory()"><span></span> Add New</button>
+
+                </div>
+                <div class="list__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Description</th>
+                                <th>Unit</th>
+                                <th>Buying</th>
+                                <th>Selling</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+          
+                            <tr *ngFor="let n of inventory$ | async" 
+                                (click)="activeRow($event); log(n);">
+                                <td>{{n.code}}</td>
+                                <td>{{n.description}}</td>
+                                <td>{{n.unit}}</td>
+                                <td>{{n.buying}}</td>
+                                <td>{{n.selling}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="col detail">
+
+                <div class="placeholder-div" *ngIf="placeholderMode">
+                    <h5 class="status">No Item selected</h5>
+                    <p>Select inventory item to see and or edit details.</p>
+                </div>
+
+                <inventory-detail *ngIf="detailMode" [detail]="activeDetail"></inventory-detail>
+
+                <inventory-add *ngIf="addMode"></inventory-add>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>

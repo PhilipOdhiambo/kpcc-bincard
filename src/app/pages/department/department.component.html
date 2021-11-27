@@ -1,0 +1,66 @@
+
+
+<div class="component">
+
+    <h1 style="text-align: center;">Departments</h1>
+
+    <div class="head">
+        <div class="head__left">
+            <span class="logo"></span>
+            <input type="text">
+        </div>
+        <div class="head__right">
+            <button (click)="toggleAddDepartment()"><span></span> Add Department</button>
+        </div>        
+    </div>
+    
+    <div class="table">
+    <table class="table__content">
+        <thead>
+            <tr>
+                <th class="coln1 coln">Unit Name</th>
+                <th class="coln2 coln">Department</th>
+                <th class="coln3 coln">Unit Category</th>
+                <th class="coln4 coln">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let unit of departmentList$ | async">
+                <td class="coln1 coln">{{unit.unitName}}</td>
+                <td class="coln2 coln">{{unit.department}}</td>
+                <td class="coln3 coln">{{unit.category}}</td>
+                <td class="coln4 coln">
+
+                    <span class="edit" 
+                        (click)="editDepartment=!editDepartment;activatedUnit=unit">
+                    </span>
+
+                    <span class="delete"
+                        (click)="deleteDepartment=!deleteDepartment;activatedUnit=unit">
+                    </span>
+
+                </td>
+        </tbody>
+
+    </table>
+    </div>
+    <add-department
+        *ngIf="addDepartment" 
+        (close)="addDepartmentClosed($event);addDepartment=!addDepartment;">
+    </add-department>
+
+    <edit-department
+        *ngIf="editDepartment"
+        (close)="editDepartment=!editDepartment"
+        [unit]="activatedUnit">
+    </edit-department>
+
+    <delete-alert
+    *ngIf="deleteDepartment"
+        (delete)="deleteResource($event)">
+    </delete-alert>
+
+    
+    <div class="footer"></div>
+
+</div>

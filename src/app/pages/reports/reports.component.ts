@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router,ActivatedRoute} from '@angular/router';
 import { Subscription } from 'rxjs';
-import { BincardService } from '../../service/bincard.service';
+import { BincardService } from '../../services/bincard.service';
 import { Issue, Receipt, TransDetail } from '../../models/types';
 import * as moment from 'moment'; // Used to handle time
 import * as XLSX from 'xlsx';  // To export the report to excel

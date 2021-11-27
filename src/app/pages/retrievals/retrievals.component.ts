@@ -8,7 +8,7 @@ import { Router,ActivatedRoute} from '@angular/router';
 import { DRUGS } from '../../shared/drug.Data';
 import { Drug } from '../../models/types'
 import * as moment from 'moment'; // monent is a library to handle time
-import { BincardService } from '../../service/bincard.service';
+import { BincardService } from '../../services/bincard.service';
 import { Subscription } from 'rxjs';
 
 @Component({

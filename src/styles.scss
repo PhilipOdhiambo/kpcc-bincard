@@ -2,7 +2,7 @@
 
 /* Import functions, variables and mixins that are neede by other bootstrap files
 */
-@import "variables.scss";
+@import "scss/variables.scss";
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
@@ -11,7 +11,7 @@
 // Import Bootsrap Roboot
 @import "~bootstrap/scss/reboot";
 
-@import "reset.scss";
+@import "scss/reset.scss";
 
 body {
     background-color: #eeeeee;

@@ -1,0 +1,49 @@
+// $primary: #0a65ff;
+// $negative: #E01A1A;
+// $positive: #008400;
+// $warning: #BA5300;
+// $info: #0276BA;
+
+
+// $bg: #FFFFFF;
+// $bg-input: #DAE1EC;
+// $selected: #EBF2FF;
+
+// $p-text: #2E3B52;
+// $s-text: #606F89;
+// $icon: #6F809E;
+// $stroke: #7D90B2;
+
+// $stripes: #F4F7FC;
+
+
+@import 'src/scss/color-palatte.scss';
+section {
+    height:90vh;
+    background-image: url(src/assets/drug_pic.jpg);
+    background-size: cover;
+    padding: 5rem;
+    padding-top: 2rem;
+
+    .title {
+        padding-bottom: 1.5rem;
+        color: $primary;
+    }
+    .intro {
+        font-weight: 500;
+        font-size: 24px;
+    }
+}
+
+
+.dept {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    background-color: $primary !important;
+    color: $bg !important;
+    &:hover {
+        background-color: $stroke !important;
+    }
+
+}

@@ -10,8 +10,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AppComponent } from './app.component';
 
 // Components
-import { HomePageComponent } from './home-page/home-page.component';
-import { NavComponent } from './nav/nav.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { NavComponent } from './components/nav/nav.component';
 import { ReceiptsComponent } from './pages/receipts/receipts.component';
 import { IssuesComponent } from './pages/issues/issues.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +22,14 @@ import { AppRoutingModule } from './app.routingModule';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { RetrievalsComponent } from './pages/retrievals/retrievals.component';
+import { DepartmentComponent } from './pages/department/department.component';
+import { AddDepartmentComponent } from './pages/department/add-department/add-department.component';
+import { EditDepartmentComponent } from './pages/department/edit-department/edit-department.component';
+import { RemoveDepartmentComponent } from './pages/department/remove-department/remove-department.component';
+import { DeleteAlertComponent } from './components/delete-alert/delete-alert.component';
+import { InventoryComponent } from './pages/inventory/inventory.component';
+import { InventoryDetailComponent } from './pages/inventory/inventory-detail/inventory-detail.component';
+import { InventoryAddComponent } from './pages/inventory/inventory-add/inventory-add.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +41,14 @@ import { RetrievalsComponent } from './pages/retrievals/retrievals.component';
     AutoFocusDirective,
     ReportsComponent,
     RetrievalsComponent,
+    DepartmentComponent,
+    AddDepartmentComponent,
+    EditDepartmentComponent,
+    RemoveDepartmentComponent,
+    DeleteAlertComponent,
+    InventoryComponent,
+    InventoryDetailComponent,
+    InventoryAddComponent,
   ],
   imports: [
     BrowserModule,

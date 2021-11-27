@@ -1,0 +1,124 @@
+$primary: #0741a5;
+$primary-dark: #052458;
+$secondary: #ffffff;
+$accent: #b4933a;
+$bg: #e6f4f1;
+
+.page {
+    background-color: $bg;
+    padding-top: 2rem;
+
+    .title {
+        padding-left: 2rem;
+        color: #ffffff;
+    }
+}
+
+.container {
+    margin: auto;
+    border-radius: 5px;
+    background-color: $primary;
+    padding: 0.5rem;
+
+    .row {
+        height: 74vh;
+        padding-bottom: 2rem;
+    }
+}
+
+.list {
+    height: 100%;
+    background-color: white;
+    margin: 10px;
+    margin-left: 2rem;
+    border-radius: 5px;
+    padding: 10px;
+
+    &__header {
+        margin: 0 auto .5rem 55px;
+        display: flex;
+        justify-content: flex-start;
+
+        .icon {
+            display: inline-block;
+            width: 2em;
+            height: 2em;
+            background-color: #0741a5;
+            mask: url(/assets/icons/bars.svg) no-repeat center ;
+            
+        }
+
+        input {
+        
+            border-style: none;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 5px;
+            width: 30%;
+            border: 1px solid $primary-dark;
+            font-weight: 500;
+            font-size: 14px;
+            border-radius: 0.2em;
+            padding: 0.3em;
+        }
+
+        button {
+            display: block;
+            margin-left: auto;
+
+            display: flex;
+            align-items: center;
+            background-color: $primary;
+            padding: .3em .5em;
+            color: $bg;
+            border-radius: 6px;
+            border-style: none;
+            span {
+                display: inline-block;
+                width: 2em;
+                height: 2em;
+                background-color: $bg;
+                mask: url(/assets/add.svg) no-repeat center;
+            }
+        }
+    }
+
+    table {
+        border-style: none;
+
+        th,
+        td {
+            padding: 10px;
+            height: 1rem;
+            //max-width: 250px;
+        }
+
+        thead tr {
+            background-color: $bg;
+        }
+
+        tbody tr {
+            &:nth-of-type(even) {
+                background-color: $bg;
+            }
+            &:hover {
+                background-color: #af9e726e;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.active-row {
+    background-color: #b4933a !important;
+    color: $bg;
+}
+
+.placeholder-div {
+    position: absolute;
+    top: 5rem;
+    background-color: $primary;
+    color: #fafafa;
+}
+
+
