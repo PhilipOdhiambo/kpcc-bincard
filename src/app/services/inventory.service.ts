@@ -9,12 +9,14 @@ import { InventoryI } from '../models/inventory';
 export class InventoryService {
 
   collection = "inventory";
-  inventoryList:Array<any> = []
+  inventoryListObserver:Observable<any>
 
 
   constructor(
     private db:AngularFirestore
-  ) { }
+  ) { 
+    this.inventoryListObserver = this.getInventory();
+  }
 
 
   createInventory(invent:InventoryI) {
@@ -48,7 +50,6 @@ export class InventoryService {
       querySnapshot.map(doc => {
        temp.push(doc.payload.doc.data());
       });
-      this.inventoryList = temp;     
     });
 
   }

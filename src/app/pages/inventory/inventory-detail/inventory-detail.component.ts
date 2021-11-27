@@ -67,6 +67,7 @@ export class InventoryDetailComponent implements OnInit,OnChanges {
 
   deleteInventory() {
     this.inventoryService.deleteInventory(this.i.id);
+    this.resetFields()
   }
 
 

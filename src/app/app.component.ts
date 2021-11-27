@@ -29,7 +29,6 @@ export class AppComponent {
 
  fetchInventory () {
    this.inventoryService.getInventory().subscribe((list:Array<any>) => {
-     this.inventoryService.inventoryList = list;
    })
  }
 }

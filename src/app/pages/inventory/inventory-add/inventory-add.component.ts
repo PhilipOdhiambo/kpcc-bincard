@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import Inventory, { InventoryI } from 'src/app/models/inventory';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -10,8 +11,11 @@ import { InventoryService } from 'src/app/services/inventory.service';
 })
 export class InventoryAddComponent implements OnInit {
 
-  i: Inventory;
+  newInventory: Inventory;
+
   inventoryList:Array<any> = []
+  inventoryListSubscription:Subscription
+
   duplicateCode = false;
 
 
@@ -20,27 +24,25 @@ export class InventoryAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.instantiateInventory()
     this.resetFields()
+  }
 
-    // this.inventoryService.getInventory().subscribe((list:Array<any>) => {
-    //   this.inventoryList = list
-
-    // })
-
-    this.inventoryList = this.inventoryService.inventoryList
-
+  instantiateInventory() {
+    this.inventoryListSubscription = this.inventoryService.inventoryListObserver
+    .subscribe(list => this.inventoryList = list)
   }
 
   addNewInventory(myform: NgForm) {
 
     if (myform.valid && this.duplicateCode==false) {
       let inventory:InventoryI = {
-        code: this.i.code, 
-        buying: this.i.buying, 
-        description: this.i.description, 
-        markup: this.i.markup,
-        selling: this.i.selling,
-        unit:this.i.unit
+        code: this.newInventory.code, 
+        buying: this.newInventory.buying, 
+        description: this.newInventory.description, 
+        markup: this.newInventory.markup,
+        selling: this.newInventory.selling,
+        unit:this.newInventory.unit
       }
       this.inventoryService.createInventory(inventory)
       this.resetFields();
@@ -63,11 +65,11 @@ export class InventoryAddComponent implements OnInit {
 
 
   recalculate() {
-    this.i.selling = (parseFloat(this.i.buying) * parseFloat(this.i.markup)).toString()
+    this.newInventory.selling = (parseFloat(this.newInventory.buying) * parseFloat(this.newInventory.markup)).toString()
   }
 
   resetFields() {
-    this.i = new Inventory("", "", "", "");
+    this.newInventory = new Inventory("", "", "", "");
   }
 
 

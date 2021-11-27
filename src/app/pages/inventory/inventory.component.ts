@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { InventoryI } from 'src/app/models/inventory';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -13,18 +13,22 @@ import { InventoryService } from 'src/app/services/inventory.service';
 export class InventoryComponent implements OnInit {
   editButton:HTMLElement;
   activeDetail!:InventoryI;
+
   addMode=false;
   detailMode = false;
   placeholderMode = true
 
-  inventory$:Observable<any>;
+  inventory$:Array<any>;
+  inventorySub:Subscription
 
   constructor(
     private inventoryService:InventoryService
   ) { }
 
   ngOnInit(): void {
-    this.inventory$ = this.inventoryService.getInventory();
+    this.inventorySub = this.inventoryService.inventoryListObserver.subscribe(result => {
+      this.inventory$ = result
+    })
   }
 
   newInventory() {
@@ -34,26 +38,21 @@ export class InventoryComponent implements OnInit {
   }
 
 
-  activeRow($event:Event){
+  activeRow($event:Event,activatedInventory:InventoryI){
     const selected = $event.target as HTMLElement;
-    const currentRed = document.querySelector('.active-row');
-    if (currentRed) {
-      currentRed.classList.remove('active-row');
+    const previousSelection = document.querySelector('.active-row');
+    if (previousSelection) {
+      previousSelection.classList.remove('active-row');
     }
     selected.closest('tr').classList.add('active-row')
     this.placeholderMode = false;
     this.detailMode = true;
     this.addMode = false;
-
-  }
-
-  log(n:InventoryI){
-    this.activeDetail = n;
+    // Pass data to detail component
+    this.activeDetail = activatedInventory;
   }
 }
 
-function undoEdit() {
 
-}
 
 

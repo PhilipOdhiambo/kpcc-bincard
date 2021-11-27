@@ -23,8 +23,8 @@
                         </thead>
                         <tbody>
           
-                            <tr *ngFor="let n of inventory$ | async" 
-                                (click)="activeRow($event); log(n);">
+                            <tr *ngFor="let n of inventory$" 
+                                (click)="activeRow($event,n);">
                                 <td>{{n.code}}</td>
                                 <td>{{n.description}}</td>
                                 <td>{{n.unit}}</td>

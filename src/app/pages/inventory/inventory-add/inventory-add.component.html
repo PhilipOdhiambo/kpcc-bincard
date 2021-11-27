@@ -3,7 +3,7 @@
     <div class="form-content">
         <div class="field">
             <label>Code</label>
-            <input #code type="text" required autocomplete="off" name="code" [(ngModel)]="i.code"
+            <input #code type="text" required autocomplete="off" name="code" [(ngModel)]="newInventory.code"
                 (input)="flagDuplicateCode(code)">
         </div>
         <div hidden class="code-exist text-danger" style="font-size: small;padding-left: 5.5rem;">
@@ -12,23 +12,23 @@
 
         <div class="field">
             <label>Description</label>
-            <input type="text" required autocomplete="off" name="description" [(ngModel)]="i.description">
+            <input type="text" required autocomplete="off" name="description" [(ngModel)]="newInventory.description">
         </div>
         <div class="field">
             <label>Unit</label>
-            <input type="text" required autocomplete="off" name="unit" [(ngModel)]="i.unit">
+            <input type="text" required autocomplete="off" name="unit" [(ngModel)]="newInventory.unit">
         </div>
         <div class="field">
             <label>Buying</label>
-            <input type="text" (blur)="recalculate()" autocomplete="off" name="buying" [(ngModel)]="i.buying">
+            <input type="text" (blur)="recalculate()" autocomplete="off" name="buying" [(ngModel)]="newInventory.buying">
         </div>
         <div class="field">
             <label>Markup</label>
-            <input type="text" (blur)="recalculate()" autocomplete="off" name="markup" [(ngModel)]="i.markup">
+            <input type="text" (blur)="recalculate()" autocomplete="off" name="markup" [(ngModel)]="newInventory.markup">
         </div>
         <div class="field">
             <label>Selling</label>
-            <input type="text" autocomplete="off" name="selling" [(ngModel)]="i.selling" value="{{i.selling}}">
+            <input type="text" autocomplete="off" name="selling" [(ngModel)]="newInventory.selling" >
         </div>
     </div>
 
