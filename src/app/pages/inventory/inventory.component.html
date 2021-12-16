@@ -6,7 +6,7 @@
             <div class="col list">
                 <div class="list__header">
                     <span class="icon"></span>
-                    <input type="text" placeholder="Filter inventory">
+                    <input #filterString (input)="filterInventory(filterString)" type="text" placeholder="Filter inventory">
                     <button (click)="newInventory()"><span></span> Add New</button>
 
                 </div>
@@ -23,7 +23,7 @@
                         </thead>
                         <tbody>
           
-                            <tr *ngFor="let n of inventory$" 
+                            <tr *ngFor="let n of inventory" 
                                 (click)="activeRow($event,n);">
                                 <td>{{n.code}}</td>
                                 <td>{{n.description}}</td>
