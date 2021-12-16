@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import Inventory, { InventoryI } from 'src/app/models/inventory';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -12,6 +12,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
 export class InventoryAddComponent implements OnInit {
 
   newInventory: Inventory;
+  inventory$:Observable<InventoryI[]>
 
   inventoryList:Array<any> = []
   inventoryListSubscription:Subscription
@@ -26,10 +27,11 @@ export class InventoryAddComponent implements OnInit {
   ngOnInit(): void {
     this.instantiateInventory()
     this.resetFields()
+    this.inventoryList = JSON.parse(localStorage.getItem("inventory"))
   }
 
   instantiateInventory() {
-    this.inventoryListSubscription = this.inventoryService.inventoryListObserver
+    this.inventoryListSubscription = this.inventoryService.localInventory$
     .subscribe(list => this.inventoryList = list)
   }
 

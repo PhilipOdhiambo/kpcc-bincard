@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // AngularFire Modules and environment config
 import { AngularFireModule } from '@angular/fire';
@@ -54,6 +55,7 @@ import { InventoryAddComponent } from './pages/inventory/inventory-add/inventory
     BrowserModule,
     FormsModule,
     ClickOutsideModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BsDatepickerModule.forRoot(),
     AngularFirestoreModule,

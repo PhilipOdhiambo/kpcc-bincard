@@ -18,6 +18,7 @@
     ]
   },
   "angularCompilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   }

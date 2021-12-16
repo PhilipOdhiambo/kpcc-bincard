@@ -70,5 +70,4 @@ export class InventoryDetailComponent implements OnInit,OnChanges {
     this.resetFields()
   }
 
-
 }

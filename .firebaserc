@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "bincard-kpcc"
+  },
+  "targets": {
+    "bincard-kpcc": {
+      "hosting": {
+        "bincard-kpcc": [
+          "bincard-kpcc"
+        ]
+      }
+    }
   }
 }

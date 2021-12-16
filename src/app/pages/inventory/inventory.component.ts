@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { InventoryI } from 'src/app/models/inventory';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -19,16 +18,14 @@ export class InventoryComponent implements OnInit {
   placeholderMode = true
 
   inventory$:Array<any>;
-  inventorySub:Subscription
 
   constructor(
     private inventoryService:InventoryService
   ) { }
 
   ngOnInit(): void {
-    this.inventorySub = this.inventoryService.inventoryListObserver.subscribe(result => {
-      this.inventory$ = result
-    })
+    this.inventoryService.localInventory$.subscribe(res => this.inventory$ = [...res])
+
   }
 
   newInventory() {
@@ -51,8 +48,6 @@ export class InventoryComponent implements OnInit {
     // Pass data to detail component
     this.activeDetail = activatedInventory;
   }
+
+  
 }
-
-
-
-

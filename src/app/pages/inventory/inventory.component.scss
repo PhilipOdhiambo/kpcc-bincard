@@ -85,12 +85,13 @@ $bg: #e6f4f1;
 
     table {
         border-style: none;
-
+        display: block;
+        overflow: auto;
+       height: 65vh;
         th,
         td {
             padding: 10px;
             height: 1rem;
-            //max-width: 250px;
         }
 
         thead tr {
@@ -106,6 +107,7 @@ $bg: #e6f4f1;
                 cursor: pointer;
             }
         }
+
     }
 }
 

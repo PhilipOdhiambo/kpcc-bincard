@@ -5,6 +5,7 @@ export interface InventoryI {
     description:string;
     buying:string;
     markup:string;
+    modified?:Date;
     selling:string;
   }
 
