@@ -4,7 +4,7 @@
 
 import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit,
   Renderer2 } from '@angular/core';
-import { FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormArray, Validators, FormControl, FormGroup } from '@angular/forms';
 import { Router,ActivatedRoute} from '@angular/router';
 import { Departments } from '../../shared/department.Data';
 import { DRUGS } from '../../shared/drug.Data';
@@ -28,6 +28,8 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
   private qtySubsc: Subscription = new Subscription();
   filteredDepartments:string[] = [];
   filteredDrugs: Array<Drug> = [];
+  myForm: FormGroup;
+  myFormDetail:FormArray;
 
   constructor(
     private fb: FormBuilder,
@@ -36,13 +38,6 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
     private binService: BincardService
   ) { }
 
-    /* Declare and Initialize reactive form */
-    myForm = this.fb.group({
-      receiptFrom: ['', Validators.required],
-      receiptRef: ['', Validators.required],
-      receiptDate: [ moment(new Date()).format('YYYY-MM-DD'),Validators.required],
-      receiptDetails: this.fb.array([])
-    });
 
   /* Geters */
   get formRef() {
@@ -62,9 +57,28 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
     },0);
   }
   
-  ngOnInit(): void { 
+  ngOnInit(): void {
 
+    /* Declare and Initialize reactive form */
+    this.myForm = this.fb.group({
+      departmentFrom: ['', Validators.required],
+      departmentTo: ['', Validators.required],
+      fromBufferOrWoking: '',
+      toBufferOrWorking: "",
+      orderBy: '',
+      orderByTime: '',
+      approvedBy: '',
+      approvedByTime: '',
+      issuedBy: '',
+      issuedByTime: '',
+      receivedBy: '',
+      receivedByTime: '',
+      receiptDate: [ moment(new Date()).format('YYYY-MM-DD'),Validators.required],
+      receiptDetails: this.fb.array([])
+    });
   }
+
+  
   
   ngAfterViewInit() {
     this.qtySubsc = this.qty.changes.subscribe(
@@ -121,6 +135,8 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
 
   // Add drugs to the detail section of the form
   onDrugClick(drug: Drug, drugSearch:HTMLInputElement) {
+    
+  
     this.formDetails.push(
       this.fb.group(
         {

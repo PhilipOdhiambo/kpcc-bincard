@@ -17,18 +17,14 @@ export class InventoryComponent implements OnInit {
   detailMode = false;
   placeholderMode = true
 
-  inventory:Array<InventoryI>;
-  inventory$:InventoryI[];
+  inventory:InventoryI[];
 
   constructor(
     private inventoryService:InventoryService
   ) { }
 
   ngOnInit(): void {
-    this.inventoryService.localInventory$.subscribe(res => {
-      this.inventory$ = [...res]
-      this.inventory = this.inventory$
-    })
+    this.inventoryService.inventory$.subscribe(res => this.inventory = res)
 
   }
 
@@ -40,9 +36,7 @@ export class InventoryComponent implements OnInit {
 
 
   filterInventory(filterInput:HTMLInputElement) {
-    let regex = new RegExp(filterInput.value,"i");
-    this.inventory = this.inventory$.filter(item => regex.test(item.code) || regex.test(item.description));
-
+    this.inventory = this.inventoryService.filterInventory(filterInput.value)
   }
 
 

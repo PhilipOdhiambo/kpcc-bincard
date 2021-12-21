@@ -31,7 +31,7 @@ export class InventoryAddComponent implements OnInit {
   }
 
   instantiateInventory() {
-    this.inventoryListSubscription = this.inventoryService.localInventory$
+    this.inventoryListSubscription = this.inventoryService.inventory$
     .subscribe(list => this.inventoryList = list)
   }
 
@@ -67,7 +67,7 @@ export class InventoryAddComponent implements OnInit {
 
 
   recalculate() {
-    this.newInventory.selling = (parseFloat(this.newInventory.buying) * parseFloat(this.newInventory.markup)).toString()
+    this.newInventory.selling = (parseFloat(this.newInventory.buying) * parseFloat(this.newInventory.markup)).toFixed(2).toString();
   }
 
   resetFields() {

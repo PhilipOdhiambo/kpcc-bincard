@@ -1,0 +1,70 @@
+
+* {
+    padding: 0;margin: 0;box-sizing: border-box;font-size: .85rem;
+}
+.container {
+    background-color: #ee486c;height: inherit;
+    padding-left: .75rem;
+}
+.cls-btn {
+    float: right;font-size: 1.2rem;font-weight: bold;outline: 1px solid red;
+    margin-right: .85rem;
+}
+.list {
+    list-style: none;padding: 0;margin: 0;background-color: hsla(204, 66%, 72%, 0.938);
+    position: absolute;max-height: 15rem;overflow-y: auto;left: 3.5rem;
+    left: inherit;
+    width: 15rem;max-width: 15rem;
+}
+.list-item {
+    padding:0;margin:0;
+}
+.list-item:nth-child(odd) {background-color: hsl(214, 55%, 85%)}
+.list-item:hover {
+    color: #fff;
+}
+.details {
+    display: flex;
+    flex-direction: column;
+}
+.details-array {
+    min-height: 58vh;max-height: 58vh; overflow-y: auto;background-color: rgb(173, 207, 190);
+}
+span {
+    display: inline-block;
+}
+.no {
+    width: 2rem;
+}
+.desc {
+    width: 20rem;
+}
+.cost,.qty,.total {
+    width: 5rem;
+}
+.details-summary {
+    align-self: flex-end;margin-right: 10rem;
+}
+.footer {
+    border-bottom: 2px solid #444;display:flex;justify-content: center;
+    padding-bottom: 1rem;
+}
+.btn {
+    padding: 0 .85em;
+}
+.save-btn {
+    background-color: rgb(80, 192, 24);margin-right: 5rem;
+}
+.clr-btn {
+    background-color: rgb(78, 78, 202);
+}
+.btn-remove {
+    width: 2rem;
+}
+.btn-remove:hover {
+    background-color: #f54803;
+    color: #fff;
+}
+.is-invalid{
+    border: 2px solid red;
+}

@@ -13,7 +13,7 @@ export class DepartmentComponent implements OnInit {
   addDepartment = false;
   editDepartment = false;
   deleteDepartment = false;
-  departmentList$:Observable<any>;
+  departments:DepartmentI[];
   activatedUnit:DepartmentI;
 
 
@@ -22,7 +22,7 @@ export class DepartmentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-     this.departmentList$ = this.departmentService.getDepartments()
+     this.departmentService.department$.subscribe(data => this.departments = data )
  
   }
 
@@ -51,9 +51,4 @@ export class DepartmentComponent implements OnInit {
   addDepartmentClosed(result:boolean) {
 
   }
-
-
-  
-
-
 }

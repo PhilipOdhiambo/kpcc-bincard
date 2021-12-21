@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DepartmentService } from './services/department.service';
+import { InventoryTransferService } from './services/inventory-transfer.service';
 import { InventoryService } from './services/inventory.service';
 
 @Component({
@@ -11,24 +12,8 @@ export class AppComponent {
 
   title = 'bincard-kpcc';
 
-  constructor(
-    private departmentService: DepartmentService,
-    private inventoryService: InventoryService
-  ) {
+  constructor(private transfers:InventoryTransferService) {
 
-    this.fetchDepartments();
-    this.fetchInventory();
   }
 
-
-
- fetchDepartments(){
-   this.departmentService.getDepartments();
- }
-
-
- fetchInventory () {
-  //  this.inventoryService.getInventory().subscribe((list:Array<any>) => {
-  //  })
- }
 }
