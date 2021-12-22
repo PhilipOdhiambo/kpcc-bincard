@@ -1,88 +1,75 @@
-
 <div class="container">
     <button class=" btn cls-btn" (click)="onCancel()">&times;</button>
     <h6> New Receipt</h6>
-    <form [formGroup]="myForm" autocomplete="off" >
-        <div class="head">            
+    <form [formGroup]="myForm" autocomplete="off">
+        <div class="head">
             <label>Department(from):
-                <input #dept type="text" (keyup)="filterDepartments(dept.value)"
-                (clickOutside)="onDeptclickOutside()" formControlName="receiptFrom"
-                [ngClass]="{'is-invalid':this.myForm.get('receiptFrom').invalid && this.myForm.get('receiptFrom').touched }"
-                placeholder="Search department here...">
+                <input #dept type="text" (keyup)="filterDepartments(dept.value)" (clickOutside)="onDeptclickOutside()"
+                    placeholder="Search department here...">
                 <div class="list">
-                    <p class="list-item" *ngFor="let d of filteredDepartments"
-                    (click)="onDeptClick(d)">
+                    <p class="list-item" *ngFor="let d of filteredDepartments" (click)="onDeptClick(d)">
                         {{d}}
                     </p>
                 </div>
             </label>
             <label style="margin-left:1rem"> S11 No.:
-                <input type="number" formControlName="receiptRef"
-                [ngClass]="{'is-invalid':this.myForm.get('receiptRef').invalid && this.myForm.get('receiptRef').touched}">
+                <input type="number">
             </label>
             <label style="margin-left:1rem">Date:
-                <input #date type="date" formControlName="receiptDate"
-                (change)="onDateUpdate(date.value)">
+                <input #date type="date" formControlName="receiptDate" (change)="onDateUpdate(date.value)">
             </label>
 
             <label style="display: block;margin-top: 1em;">Add Item(s):
                 <input #drugSearch type="text" (keyup)="filterDrugs(drugSearch.value)"
-                (clickOutside)="onDrugclickOutside()"
-                placeholder="Search items here...">
+                    (clickOutside)="onDrugclickOutside()" placeholder="Search items here...">
                 <div class="list">
                     <p class="list-item" *ngFor="let d of filteredDrugs;let i=index"
-                    (click)="onDrugClick(d, drugSearch)">
-                        {{d.description}}
+                        (click)="onDrugClick(d, drugSearch)">
+                        <span
+                            style="display: inline-block;margin-right: 10px;">{{d.code}}</span><span>{{d.description}}</span>
                     </p>
                 </div>
-            </label>    
+            </label>
         </div>
         <div class="detail">
-            <div class="detail-head">
-                <span class="no">No</span>
-                <span class="desc">Item Description</span>
-                <span class="cost">Cost</span>
-                <span class="qty">Quantity</span>
-                <span class="total">Total</span>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 6%;">No</th>
+                        <th style="width: 50%;">Item Description</th>
+                        <th>Cost</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr receipt-detail [detail]="detail" [index]="i" (delete)="spliceTransferDetail($event.value)" *ngFor="let detail of receiptDetail; let i=index">
+                    </tr>
+
+                </tbody>
+            </table>
+
             <div class="details" formArrayName="receiptDetails">
-                <div class="details-array">
-                    <p #detail *ngFor="let detail of formDetails.controls;let i=index" [formGroupName]="i">
-                        <span> <input class="no"  [value]="i + 1"> </span>
-                        <span> <input class="desc" formControlName="itemDesc" spellcheck="false"> </span>
-                        <span> <input class="cost" 
-                            [value]="detail.get('itemPrice').value |  number:'1.2-2'"></span>
-                        <span> <input type="number" class="qty" class="qty" #qty
-                            formControlName="itemQty"
-                            (change)="qtyOnChange(i)"
-                            (keydown.tab)="focusOnSearch()"></span>
-                        <span> <input class="total" readonly formControlName="lineTotal"
-                            [value]="detail.get('lineTotal').value |  number:'1.2-2'"></span>
-                        <span> <button class="btn-remove"  (click)="detailDelete(i)">
-                            &times;
-                        </button></span>
-                    </p>
-                </div>
+
                 <div class="details-summary">
                     <label>Total:
                         <input type="button" [value]="formDetailTotal | number:'1.2-2'">
                     </label>
                 </div>
 
-                
+
             </div>
             <div class="footer">
-                <button class="btn save-btn" (click)="saveForm()"
-                [disabled]="myForm.invalid" >
+                <button class="btn save-btn" (click)="saveForm()" [disabled]="myForm.invalid">
                     Save
                 </button>
-                <button class="btn clr-btn" (click)="clearForm()"
-                [disabled]="!formDetails.length" >
+                <button class="btn clr-btn" (click)="clearForm()" [disabled]="!formDetails.length">
                     Clear
                 </button>
-                
+
             </div>
         </div>
-    
+
     </form>
 </div>

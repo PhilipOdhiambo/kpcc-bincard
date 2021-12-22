@@ -12,11 +12,14 @@ import { Drug } from '../../models/types'
 import * as moment from 'moment'; // monent is a library to handle time
 import { BincardService } from '../../services/bincard.service';
 import { Subscription } from 'rxjs';
+import { TransferDetailI } from 'src/app/models/inventory-transfer.interface';
+import { InventoryI } from 'src/app/models/inventory';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'receipts',
   templateUrl: './receipts.component.html',
-  styleUrls: ['./receipts.component.css']
+  styleUrls: ['./receipts.component.scss']
 })
 export class ReceiptsComponent implements OnInit,AfterViewInit  {
 
@@ -27,16 +30,20 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
 
   private qtySubsc: Subscription = new Subscription();
   filteredDepartments:string[] = [];
-  filteredDrugs: Array<Drug> = [];
+  filteredDrugs: Array<InventoryI> = [];
   myForm: FormGroup;
   myFormDetail:FormArray;
+  receiptDetail:TransferDetailI[]
 
   constructor(
     private fb: FormBuilder,
     private router: Router, private activeRoute: ActivatedRoute,   
     private renderer: Renderer2,
-    private binService: BincardService
-  ) { }
+    private binService: BincardService,
+    private inventoryService:InventoryService
+  ) {
+    this.receiptDetail = []
+   }
 
 
   /* Geters */
@@ -78,6 +85,14 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
     });
   }
 
+  spliceTransferDetail(index:number) {
+    const temp = this.receiptDetail
+    this.receiptDetail = []
+    temp.forEach(i => this.receiptDetail.push(i))
+
+    
+  }
+
   
   
   ngAfterViewInit() {
@@ -114,10 +129,7 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
 
   // Filter Drugs and add the selected drug
   filterDrugs(str:string) {
-    this.filteredDrugs = DRUGS.filter(drug => {
-      const regex = new RegExp(str,'i');
-      return drug.description.search(regex) > -1;
-    });
+    this.filteredDrugs = this.inventoryService.filterInventory(str)
   }
 
   onDrugclickOutside() {
@@ -134,21 +146,11 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
   }
 
   // Add drugs to the detail section of the form
-  onDrugClick(drug: Drug, drugSearch:HTMLInputElement) {
-    
-  
-    this.formDetails.push(
-      this.fb.group(
-        {
-          item_id: [drug.id],
-          itemCode: [drug.code],
-          itemDesc: [drug.description],
-          itemPrice: [parseFloat(drug.cost).toFixed(2)],
-          itemQty: ['', Validators.required],
-          lineTotal: [null]
-        }
-      )      
-    );
+  onDrugClick(drug: InventoryI, drugSearch:HTMLInputElement) {
+    this.receiptDetail.push({
+      code: drug.code, cost:drug.buying, description: drug.description,
+      qtyOrdered:'1',qtyIssued: '', remarks: '', value: drug.buying
+    })
     drugSearch.value = '';
   }
 

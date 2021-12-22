@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NavComponent } from './components/nav/nav.component';
 import { ReceiptsComponent } from './pages/receipts/receipts.component';
+import { ReceiptComponent } from './pages/receipts/receipt/receipt.component';
 import { IssuesComponent } from './pages/issues/issues.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -38,6 +39,7 @@ import { InventoryAddComponent } from './pages/inventory/inventory-add/inventory
     HomePageComponent,
     NavComponent,
     ReceiptsComponent,
+    ReceiptComponent,
     IssuesComponent,
     AutoFocusDirective,
     ReportsComponent,
