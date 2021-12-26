@@ -1,11 +1,13 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Router,ActivatedRoute} from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, fromEvent, Subject } from 'rxjs';
 import { BincardService } from '../../services/bincard.service';
 import { Issue, Receipt, TransDetail } from '../../models/types';
 import * as moment from 'moment'; // Used to handle time
 import * as XLSX from 'xlsx';  // To export the report to excel
 import { FormControl } from '@angular/forms';
+import { InventoryTransferService } from 'src/app/services/inventory-transfer.service';
+import { InventoryTransferI } from 'src/app/models/inventory-transfer.interface';
 
 @Component({
   selector: 'reports',
@@ -14,10 +16,22 @@ import { FormControl } from '@angular/forms';
 })
 export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
 
+
+  @ViewChild('start') start:ElementRef;
+  @ViewChild('end') end:ElementRef;
+  startInput$:Observable<any>
+  endInput$:Observable<any>;
+  startInput = ''
+  endInput = ''
+  transfers:InventoryTransferI[] = []
+  transfers$:Subject<any> = new Subject()
+
   // Subscriptions
   receiptsSubsc: Subscription;
   filterSubsc: Subscription;
   issuesSubsc: Subscription;
+  subscriptions = new Subscription();
+  transferSub:Subscription = new Subscription()
 
   receipts = [];
   issues = [];
@@ -34,8 +48,11 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private binService: BincardService,
+    private inventoryTransferService:InventoryTransferService,
     private router: Router, private activeRoute: ActivatedRoute,
-    ) { }
+    ) { 
+      this.subscriptions.add()
+    }
 
 
   /* Geters */
@@ -57,60 +74,48 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    /* Reading receipts from the server */
-    this.receiptsSubsc = this.binService.receipts.subscribe((receiptsCol: Array<Receipt>) => {
-      const temp = [];
-      receiptsCol.forEach(doc => {
-        doc.receiptDetails.forEach((detail: TransDetail) => {
-          temp.push({
-            transDate: doc.receiptDate,
-            transRef: doc.receiptRef,
-            deptName: doc.receiptFrom,
-            itemId: detail.item_id,
-            itemCode: detail.itemCode,
-            itemDesc: detail.itemDesc,
-            itemCost: detail.itemPrice,
-            itemQty: detail.itemQty,
-            lineTotal: detail.lineTotal,
-          });
-        })
-      })
-      this.receipts = temp.sort((a, b) => {
-        if (a.receiptDate < b.receiptDate) -1;
-        if (a.receiptDate > b.receiptDate) 1;
-        return 0;
-      })
-    });
+   
+    let date = new Date()
+    this.startInput = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString()
+    this.endInput = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString()
+    this.getInventoryTransfers(this.startInput,this.endInput)
 
-    /* Reading issues from the server */
-    this.issuesSubsc = this.binService.issues.subscribe((issues: Array<Issue>) => {
-      const temp = [];
-      issues.forEach((doc: Issue) => {
-        doc.issueDetails.forEach((detail: TransDetail) => {
-          temp.push({
-            transDate: doc.issueDate,
-            transRef: doc.issueRef,
-            deptName: doc.issueTo,
-            itemId: detail.item_id,
-            itemCode: detail.itemCode,
-            itemDesc: detail.itemDesc,
-            itemCost: detail.itemPrice,
-            itemQty: detail.itemQty,
-            lineTotal: detail.lineTotal,
-          });
-        })
-      })
-      this.issues = temp.sort((a, b) => {
-        if (a.issueDate < b.issueDate) -1;
-        if (a.issueDate > b.issueDate) 1;
-        return 0;
-      })
-    });
+    setTimeout(() => {
+      this.startInput$ = fromEvent(this.start.nativeElement, 'change')
+      this.endInput$ = fromEvent(this.end.nativeElement, 'change')
 
-    // Read retrievals from the server
-    this.binService.retrievalRef.valueChanges().subscribe(e => {
-      this.retrievals = e
+      this.startInput$.subscribe((event:Event) => {
+        let date = new Date((event.target as HTMLInputElement).value)
+        this.startInput = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString()
+        this.getInventoryTransfers(this.startInput, this.endInput)
+      })
+      this.endInput$.subscribe((event:Event) => {
+        let date = new Date((event.target as HTMLInputElement).value)
+        this.endInput = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString()
+        this.getInventoryTransfers(this.startInput, this.endInput)
+      })
+    }, 0);
+  }  
+
+
+  getInventoryTransfers(startInput:string, endInput:string) {
+    this.transferSub.unsubscribe();
+    this.transferSub = this.inventoryTransferService.read(startInput,endInput).subscribe((res:any[]) => {
+      const transfers = []
+      res.forEach(obj => {
+        obj.data.forEach(transfer => transfers.push(transfer))
+      })
+      this.transfers$.next(transfers)
     })
+  }
+
+  filterByReceipts() {
+
+
+  }
+
+  filterByIssues() {
+
   }
 
   ngAfterViewInit() {
@@ -194,8 +199,8 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
   ngOnDestroy() {
-    this.receiptsSubsc.unsubscribe();
-    this.issuesSubsc.unsubscribe();
+    //this.receiptsSubsc.unsubscribe();
+    //this.issuesSubsc.unsubscribe();
   }
 
   /* Custom Functions */

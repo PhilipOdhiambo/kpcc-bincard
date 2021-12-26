@@ -13,9 +13,9 @@ import { AppComponent } from './app.component';
 // Components
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NavComponent } from './components/nav/nav.component';
-import { ReceiptsComponent } from './pages/receipts/receipts.component';
-import { ReceiptComponent } from './pages/receipts/receipt/receipt.component';
-import { IssuesComponent } from './pages/issues/issues.component';
+import { ReceiptsComponent } from './pages/inventory-transfer/receipts/receipts.component';
+import { ReceiptComponent } from './pages/inventory-transfer/receipts/receipt/receipt.component';
+import { IssuesComponent } from './pages/inventory-transfer/issues/issues.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ClickOutsideModule } from 'ng-click-outside';
@@ -32,6 +32,7 @@ import { DeleteAlertComponent } from './components/delete-alert/delete-alert.com
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { InventoryDetailComponent } from './pages/inventory/inventory-detail/inventory-detail.component';
 import { InventoryAddComponent } from './pages/inventory/inventory-add/inventory-add.component';
+import { InventoryTransferComponent } from './pages/inventory-transfer/inventory-transfer.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { InventoryAddComponent } from './pages/inventory/inventory-add/inventory
     InventoryComponent,
     InventoryDetailComponent,
     InventoryAddComponent,
+    InventoryTransferComponent,
   ],
   imports: [
     BrowserModule,

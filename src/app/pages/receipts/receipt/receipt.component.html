@@ -1,8 +1,0 @@
-
-  
-    <td [textContent]="index"></td>
-    <td [textContent]="detail.description"></td>
-    <td [textContent]="detail.cost"></td>
-    <td style="background-color: white;" contenteditable="true" [textContent]="detail.qtyOrdered" (input)="quantityBlur($event.target.textContent)"></td>
-    <td  [textContent]="detail.value  | number:'.2'"></td>
-    <td> <button class="btn-remove" (click)="detailDelete()">&times;</button></td>

@@ -1,0 +1,79 @@
+<div class="container">
+    <button class=" btn cls-btn" (click)="onCancel()">&times;</button>
+    <h6> New Order</h6>
+    <form [formGroup]="myForm" autocomplete="off">
+        <div class="head">
+            <label>Department Ordering:
+                <select name="" id="departmentOrdering">
+                    <option disabled selected hidden value=""> -- select --</option>
+                    <option *ngFor="let d of filteredDepartments" value="{{d.unitName}}">{{d.unitName}}</option>
+                </select>
+            </label>
+
+            <label>Department To Issue:
+                <select name="" id="departmentIssuing">
+                    <option disabled selected hidden value=""> -- select --</option>
+                    <option *ngFor="let d of filteredDepartments" value="{{d.unitName}}">{{d.unitName}}</option>
+                </select>
+            </label>
+            <label style="margin-left:1rem"> S11 No.:
+                <input type="number">
+            </label>
+            <label style="margin-left:1rem">Date:
+                <input id="date" #date type="date" formControlName="orderTime" (change)="onDateUpdate(date.value)">
+            </label>
+
+            <label style="display: block;margin-top: 1em;">Add Item(s):
+                <input id="drugSearch" #drugSearch type="text" (input)="filterDrugs(drugSearch.value)"
+                    (click)="onClickInDrugInput()" (clickOutside)="onClickOutDrugInput()"
+                    placeholder="Search items here...">
+                <div class="list">
+                    <p class="list-item" *ngFor="let d of filteredDrugs;let i=index"
+                        (click)="onDrugClick(d, drugSearch)">
+                        <span
+                            style="display: inline-block;margin-right: 10px;">{{d.code}}</span><span>{{d.description}}</span>
+                    </p>
+                </div>
+            </label>
+        </div>
+        <div class="tableWrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 3%;">No</th>
+                        <th>Item Description</th>
+                        <th>Cost</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr receipt-detail [detail]="detail" [index]="i" (delete)="spliceTransferDetail(i)"
+                        *ngFor="let detail of receiptDetail; let i=index">
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="details">
+                <div class="details-summary">
+                    <label>Total:
+                        <input type="button">
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer">
+            <button class="btn btn-success save-btn" style="padding: .4rem .8rem; font-size: large;"
+                (click)="saveForm()">
+                Save
+            </button>
+            <button class="btn clr-btn" (click)="clearForm()" [disabled]="!formDetails.length">
+                Clear
+            </button>
+
+        </div>
+
+    </form>
+</div>

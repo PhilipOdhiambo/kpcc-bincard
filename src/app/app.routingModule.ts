@@ -5,8 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 // Component Modules
 // Kpcc-bincard components
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { ReceiptsComponent } from './pages/receipts/receipts.component';
-import { IssuesComponent } from './pages/issues/issues.component';
+import { ReceiptsComponent } from './pages/inventory-transfer/receipts/receipts.component';
+import { IssuesComponent } from './pages/inventory-transfer/issues/issues.component';
 import { RetrievalsComponent } from './pages/retrievals/retrievals.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { DepartmentComponent } from './pages/department/department.component';

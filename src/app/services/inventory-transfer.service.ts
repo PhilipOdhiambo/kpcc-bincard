@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app'
+import { InventoryTransferI } from '../models/inventory-transfer.interface';
 
 
 @Injectable({
@@ -11,16 +13,35 @@ export class InventoryTransferService {
   collection = 'inventory-transfers';
 
 
-  constructor(private fs:AngularFirestore) {
+  constructor(private fsDb: AngularFirestore) {
   }
 
 
-  intitializeIntentoryTransfers() {
-
+  createTransfer(transfer: InventoryTransferI) {
+    transfer.orderTime = new Date()
+    let yearMonth = transfer.orderTime.getFullYear().toString() + "-" + (transfer.orderTime.getMonth() + 1).toString()
+    let fsTransfer = { data: [] }
+    let fsDocument: AngularFirestoreDocument = this.fsDb.collection(this.collection).doc(yearMonth);
+    return fsDocument.get().toPromise().then(doc => {
+      if (doc.exists) {
+        let existingData: InventoryTransferI[] = doc.data().data;
+        existingData.push(transfer);
+        fsTransfer.data = existingData
+        fsDocument.set(fsTransfer).then(success => console.log("Transfer added"))
+      } else {
+        fsTransfer.data.push(transfer)
+        fsDocument.set(fsTransfer).then(e => console.log("Initial Transer set"))
+      }
+    })
   }
 
 
-  createTransfer() {
-    
+  read(start: string, end: string) {
+    return this.fsDb.collection(this.collection, ref => {
+      return ref.where(firebase.firestore.FieldPath.documentId(), '>=', start)
+        .where(firebase.firestore.FieldPath.documentId(), '<=', end);
+    }).valueChanges()
   }
+
+  
 }

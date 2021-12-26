@@ -1,12 +1,16 @@
 export interface InventoryTransferI {
-  departmentFrom:string;
-  departmentTo:string;
+  departmentOrdering:string;
+  departmentIssuing:string;
   fromBufferOrWoking:string;
-  toBufferOrWorking:string;
+  stockIssuedFromBuffer:boolean;
   orderBy:string;
-  approvedBy:string;
-  issuedBy:string;
-  receivedBy:string;
+  orderTime?:Date;
+  approveBy:string;
+  approveTime?:string;
+  issueBy:string;
+  issueTime:string;
+  receiveBy:string;
+  receiveTime:string;
   items:TransferDetailI[]
 }
 

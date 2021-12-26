@@ -3,18 +3,17 @@
 // Purpose: To enable adding of a new receipt to the database
 
 import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList, AfterViewInit,
-  Renderer2 } from '@angular/core';
+ViewContainerRef} from '@angular/core';
 import { FormBuilder, FormArray, Validators, FormControl, FormGroup } from '@angular/forms';
 import { Router,ActivatedRoute} from '@angular/router';
-import { Departments } from '../../shared/department.Data';
-import { DRUGS } from '../../shared/drug.Data';
-import { Drug } from '../../models/types'
 import * as moment from 'moment'; // monent is a library to handle time
-import { BincardService } from '../../services/bincard.service';
-import { Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
 import { TransferDetailI } from 'src/app/models/inventory-transfer.interface';
 import { InventoryI } from 'src/app/models/inventory';
 import { InventoryService } from 'src/app/services/inventory.service';
+import { InventoryTransferService } from 'src/app/services/inventory-transfer.service';
+import { DepartmentI } from 'src/app/models/department.Interface';
+import { DepartmentService } from 'src/app/services/department.service';
 
 @Component({
   selector: 'receipts',
@@ -25,24 +24,26 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
 
   @ViewChild('dept') dept:ElementRef;
   @ViewChild('drugSearch') drugSearch:ElementRef;
-  @ViewChildren('detail',{read: ElementRef}) detailList:QueryList<ElementRef>;
+  @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef;
   @ViewChildren('qty') qty:QueryList<ElementRef>;
 
   private qtySubsc: Subscription = new Subscription();
-  filteredDepartments:string[] = [];
-  filteredDrugs: Array<InventoryI> = [];
+  filteredDepartments:DepartmentI[] = [];
+  filteredDrugs: InventoryI[] = [];
   myForm: FormGroup;
   myFormDetail:FormArray;
-  receiptDetail:TransferDetailI[]
+  receiptDetail:TransferDetailI[];
 
   constructor(
     private fb: FormBuilder,
     private router: Router, private activeRoute: ActivatedRoute,   
-    private renderer: Renderer2,
-    private binService: BincardService,
-    private inventoryService:InventoryService
+    private inventoryTranserService: InventoryTransferService,
+    private inventoryService:InventoryService,
+    private departmentService:DepartmentService,
+    private elRef:ElementRef
   ) {
     this.receiptDetail = []
+    
    }
 
 
@@ -55,85 +56,92 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
   }
 
   get formDetails () {
-    return this.myForm.get('receiptDetails') as FormArray;
+    return this.myForm.get('items') as FormArray;
   }
 
-  get formDetailTotal () {
-    return this.formDetails.controls.reduce((acc,curr) => {
-      return acc + curr.get('lineTotal').value || 0;
-    },0);
-  }
+  // get formDetailTotal () {
+  //   return this.formDetails.controls.reduce((acc,curr) => {
+  //     return acc + curr.get('lineTotal').value || 0;
+  //   },0);
+  // }
   
   ngOnInit(): void {
 
     /* Declare and Initialize reactive form */
     this.myForm = this.fb.group({
-      departmentFrom: ['', Validators.required],
-      departmentTo: ['', Validators.required],
+      departmentOrdering: ['', Validators.required],
+      departmentIssuing: ['', Validators.required],
       fromBufferOrWoking: '',
       toBufferOrWorking: "",
       orderBy: '',
-      orderByTime: '',
-      approvedBy: '',
-      approvedByTime: '',
-      issuedBy: '',
-      issuedByTime: '',
-      receivedBy: '',
-      receivedByTime: '',
-      receiptDate: [ moment(new Date()).format('YYYY-MM-DD'),Validators.required],
-      receiptDetails: this.fb.array([])
+      orderTime: [ moment(new Date()).format('YYYY-MM-DD'),Validators.required],
+      approveBy: '',
+      approveTime: '',
+      issueBy: '',
+      issueTime: '',
+      receiveBy: '',
+      receiveTime: '',
+      quantity:'',
+      items: this.fb.array([])
     });
-  }
-
-  spliceTransferDetail(index:number) {
-    const temp = this.receiptDetail
-    this.receiptDetail = []
-    temp.forEach(i => this.receiptDetail.push(i))
-
+    this.departmentService.department$.subscribe(res => this.filteredDepartments = res)
     
   }
 
+  spliceTransferDetail(index:number) {
+    this.receiptDetail.splice(index,1)   
+  }
   
   
   ngAfterViewInit() {
-    this.qtySubsc = this.qty.changes.subscribe(
-    (change:QueryList<ElementRef>) =>{
-      if (change.length) {
-        const node = this.renderer.selectRootElement(change.last.nativeElement);
-        setTimeout(() => node.focus(), 0);
-      }      
-    }
-  )
+    
   }
+
+
   ngOnDestroy(){
     this.qtySubsc.unsubscribe;
   } 
   
+  
   // Filter Departments and add the selected department
   filterDepartments(str:string) {
-    this.filteredDepartments = Departments.filter(department => {
-      const regex = new RegExp(str,'i');
-      return department.search(regex) > -1;
-    });
+    this.filteredDepartments = this.departmentService.filterDepartments(str)
   }
+
+
 
   // When a department is selected from the dropdown
-  onDeptClick(d) {
-    this.myForm.get('receiptFrom').setValue(d);
-    this.filteredDepartments = [];
-  }
-  onDeptclickOutside() {
+  departmentOrdering(department) {
+    this.myForm.get('departmentOrdering').setValue(department);
     this.filteredDepartments = [];
   }
 
+  departmentIssuing(department) {
+    this.myForm.get('departmentIssuing').setValue(department);
+    this.filteredDepartments = [];
+  }
 
-  // Filter Drugs and add the selected drug
+  onClickOutDeptInput() {
+    this.filteredDepartments = [];
+    (this.dept.nativeElement as HTMLInputElement).value = '';
+  }
+
+  onClickInDeptInput() {
+   this.filterDepartments('')
+  }
+
+
   filterDrugs(str:string) {
     this.filteredDrugs = this.inventoryService.filterInventory(str)
   }
 
-  onDrugclickOutside() {
+  onClickOutDrugInput() {
     this.filteredDrugs = [];
+    (this.drugSearch.nativeElement as HTMLInputElement).value = ''
+  }
+
+  onClickInDrugInput() {
+    this.filterDrugs('')
   }
 
   // Cancel page
@@ -149,9 +157,24 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
   onDrugClick(drug: InventoryI, drugSearch:HTMLInputElement) {
     this.receiptDetail.push({
       code: drug.code, cost:drug.buying, description: drug.description,
-      qtyOrdered:'1',qtyIssued: '', remarks: '', value: drug.buying
+      qtyOrdered:'',qtyIssued: '', remarks: '', value: drug.buying
     })
-    drugSearch.value = '';
+    const deptOrdering:HTMLSelectElement = (this.elRef.nativeElement as Document).querySelector('#departmentOrdering')
+    const deptIssuing:HTMLSelectElement = (this.elRef.nativeElement as Document).querySelector('#departmentIssuing')
+    console.log(this.myForm.value);
+    setTimeout(() => {
+      drugSearch.value = '';
+      this.filteredDrugs = []
+    }, 0);
+
+  }
+
+  onDeptClick(department:DepartmentI, departmentInput:HTMLInputElement) {
+    
+    setTimeout(() => {
+      (this.dept.nativeElement as HTMLInputElement).value = department.unitName;
+      this.filteredDepartments = []
+    }, 0);
   }
 
   // When the value of qty field changed it updates the lineTotal field
@@ -161,17 +184,6 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
     this.formDetails.at(index).get('lineTotal').setValue(qty * cost);    
   }
 
-  // When the qty field is tabbed focus goes back to the search field
-  focusOnSearch() {
-    const searchInput = this.drugSearch.nativeElement;
-    setTimeout(() => {searchInput.focus()}, 0);
-    
-  }
-
-  // Deleteing a single detail line 
-  detailDelete(index) {
-    this.formDetails.removeAt(index);
-  }
 
   // Clear form
   clearForm() {
@@ -184,19 +196,12 @@ export class ReceiptsComponent implements OnInit,AfterViewInit  {
 
   // Saving form information
    saveForm() {
-
-    this.binService.receiptColRef.doc('' + this.formRef.value).set(this.myForm.value)
-    .then(() => {
-
-      alert('Operation Successful..');
-
-      /* I choose to clear individual controls instead of using an easier method "form.reset()"
-      because this method messes up the tabbing functionality for the next data entry */
-
-      this.myForm.get('receiptFrom').setValue('');
-      this.myForm.get('receiptRef').setValue('');
-      this.myForm.get('receiptDate').setValue('');
-      this.formDetails.controls.splice(0);
-    });   
+     if (this.receiptDetail.length == 0) {
+       return
+     }
+    this.receiptDetail.forEach(detail =>  {
+      (this.myForm.controls['items'] as FormArray).push(this.fb.group(detail))
+    })
+   this.inventoryTranserService.createTransfer(this.myForm.value).then(res => this.receiptDetail = [])  
   }
 }

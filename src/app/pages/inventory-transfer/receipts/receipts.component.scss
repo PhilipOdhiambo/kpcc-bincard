@@ -1,0 +1,92 @@
+$primary: #0741a5;
+$primary-dark: #052458;
+$secondary: #ffffff;
+$accent: #b4933a;
+$bg: #e6f4f1;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 0.85rem;
+}
+.container {
+    //background-color: #ee486c;
+    height: inherit;
+    padding-left: 0.75rem;
+}
+.cls-btn {
+    float: right;
+    font-size: 1.2rem;
+    font-weight: bold;
+    outline: 1px solid red;
+    margin-right: 0.85rem;
+}
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: hsla(204, 66%, 72%, 0.938);
+    position: absolute;
+    max-height: 15rem;
+    overflow-y: auto;
+    left: 3.5rem;
+    z-index: 5;
+    left: inherit;
+    width: 15rem;
+    max-width: 15rem;
+    .list-item {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.list-item:nth-child(odd) {
+    background-color: hsl(214, 55%, 85%);
+}
+.list-item:hover {
+    color: #fff;
+}
+.details {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Set a fixed scrollable wrapper */
+.tableWrap {
+    height: 200px;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    border-bottom: 2px solid rgb(114, 111, 111);
+    padding-bottom: 1rem;
+    overflow: auto;
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    font-family: sans-serif;
+        thead {
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.85);
+            tr th {
+                position: sticky;
+                top: 0;
+                padding: 16px;
+                padding-left: 15px;
+                border-left: 1px dotted rgba(200, 209, 224, 0.6);
+                border-bottom: 1px solid #e8e8e8;
+                background: #ffc491;
+                text-align: left;
+            }
+        }
+        tbody tr {
+            border-bottom: 2px solid #e8e8e8;
+            &:hover {
+                background: #e6f7ff;
+            }
+            td {
+                padding: 16px;
+            }
+        }       
+    }
+}
+

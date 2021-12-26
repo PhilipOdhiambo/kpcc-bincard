@@ -66,4 +66,10 @@ export class DepartmentService {
         }
       })
   }
+
+  filterDepartments(str: string): DepartmentI[] {
+    let regex = new RegExp(str, "i");
+    return this.department.filter(item =>
+      regex.test(item.unitName) || regex.test(item.department));
+  }
 }

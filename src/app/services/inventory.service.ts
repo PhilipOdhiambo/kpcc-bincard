@@ -21,15 +21,8 @@ export class InventoryService {
     private db: AngularFirestore,
     private http: HttpClient
   ) {
-    this.printHello()
     this.getInventory()
   }
-
-
-  printHello() {
-    console.log("heerr")
-  }
-
 
   initialDataUpload() {
     this.http.get("assets/inventory.json").toPromise().then((docs: any[]) => {
