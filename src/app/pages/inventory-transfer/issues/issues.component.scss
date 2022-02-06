@@ -1,0 +1,59 @@
+.container {
+  margin: auto;
+  .main {
+    height: 80vh;
+    background: rgb(211, 231, 211);
+    margin: auto;
+    padding: 2em;
+    border-right: 2px solid gray;
+    display: flex;
+    .orders {
+      width: 20vw;
+      
+      box-shadow: 0 0 5px 3px 
+      rgb(147, 163, 147, 0.25) ;
+      .filter {
+     
+        div {
+          display: inline-block;
+          margin: 10px 30px 0 15px;
+        }
+      }
+      .orders-table {
+        padding: 5px;
+        table {
+          width: 100%;
+          padding: 5px;
+        }
+      }
+ 
+      table th {
+        background: rgb(147, 163, 147);
+        width: 70px;        
+      }
+
+    }
+
+    // Order datail
+     .order-detail > div label {
+      width: 120px;
+      text-align: right;
+      padding-right: 5px;
+    }
+    .table {
+      padding: .5rem;
+      margin: 1rem;
+      background: white;
+
+    }
+  }
+
+}
+
+.active {
+  background-color: rgb(146, 128, 128);
+}
+
+tr:hover {
+  background-color: rgb(182, 172, 172);
+}

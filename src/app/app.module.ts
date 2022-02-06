@@ -13,8 +13,7 @@ import { AppComponent } from './app.component';
 // Components
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NavComponent } from './components/nav/nav.component';
-import { ReceiptsComponent } from './pages/inventory-transfer/receipts/receipts.component';
-import { ReceiptComponent } from './pages/inventory-transfer/receipts/receipt/receipt.component';
+import { ReceiptsComponent } from './pages/inventory-transfer/order/order.component';
 import { IssuesComponent } from './pages/inventory-transfer/issues/issues.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -23,7 +22,6 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { AppRoutingModule } from './app.routingModule';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
 import { ReportsComponent } from './pages/reports/reports.component';
-import { RetrievalsComponent } from './pages/retrievals/retrievals.component';
 import { DepartmentComponent } from './pages/department/department.component';
 import { AddDepartmentComponent } from './pages/department/add-department/add-department.component';
 import { EditDepartmentComponent } from './pages/department/edit-department/edit-department.component';
@@ -33,6 +31,8 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 import { InventoryDetailComponent } from './pages/inventory/inventory-detail/inventory-detail.component';
 import { InventoryAddComponent } from './pages/inventory/inventory-add/inventory-add.component';
 import { InventoryTransferComponent } from './pages/inventory-transfer/inventory-transfer.component';
+import { IssueComponent } from './pages/inventory-transfer/issues/issue/issue.component';
+import { PreauthsComponent } from './pages/preauthModule/components/preauths/preauths.component';
 
 @NgModule({
   declarations: [
@@ -40,11 +40,9 @@ import { InventoryTransferComponent } from './pages/inventory-transfer/inventory
     HomePageComponent,
     NavComponent,
     ReceiptsComponent,
-    ReceiptComponent,
     IssuesComponent,
     AutoFocusDirective,
     ReportsComponent,
-    RetrievalsComponent,
     DepartmentComponent,
     AddDepartmentComponent,
     EditDepartmentComponent,
@@ -54,6 +52,8 @@ import { InventoryTransferComponent } from './pages/inventory-transfer/inventory
     InventoryDetailComponent,
     InventoryAddComponent,
     InventoryTransferComponent,
+    IssueComponent,
+    PreauthsComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,23 +4,20 @@ $secondary: #ffffff;
 $accent: #b4933a;
 $bg: #e6f4f1;
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-size: 0.85rem;
-}
+
+
 .container {
     //background-color: #ee486c;
     height: inherit;
     padding-left: 0.75rem;
 }
 .cls-btn {
-    float: right;
-    font-size: 1.2rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    outline: 1px solid red;
-    margin-right: 0.85rem;
+    display: inline;
+    &:hover {
+        color: rgb(230, 61, 61);
+    }
 }
 .list {
     list-style: none;
@@ -80,13 +77,24 @@ $bg: #e6f4f1;
         }
         tbody tr {
             border-bottom: 2px solid #e8e8e8;
-            &:hover {
-                background: #e6f7ff;
-            }
+            // &:hover {
+            //     //background: #e6f7ff;
+            // }
             td {
-                padding: 16px;
+                padding: 5px 16px;
+                input {
+                    display: block;
+                    border: none;
+                    width: 100%;
+                    background-color: rgb(240, 236, 204);
+                }
             }
         }       
     }
+}
+
+.has-error {
+    //border: initial !important;
+    border:  1px solid tomato !important;
 }
 

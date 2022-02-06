@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
-import { firestore } from '@firebase/firestore';
+import firebase from 'firebase';
 import { HttpClient } from '@angular/common/http'
 import {Subject} from 'rxjs';
 import { InventoryI } from '../models/inventory';
@@ -22,11 +21,12 @@ export class InventoryService {
     private http: HttpClient
   ) {
     this.getInventory()
+    //this.initialDataUpload()
   }
 
   initialDataUpload() {
-    this.http.get("assets/inventory.json").toPromise().then((docs: any[]) => {
-      let medicine = [...docs.slice(0, 5)];
+    this.http.get("assets/inventory1.json").toPromise().then((docs: any[]) => {
+      let medicine = [...docs];
       this.db.collection(this.collection).doc('medicine').set({ data: medicine })
     });
   }
@@ -52,7 +52,7 @@ export class InventoryService {
 
   filterInventory(str: string): InventoryI[] {
     let regex = new RegExp(str, "i");
-    return this.inventory.filter(item =>
+    return this.inventory?.filter(item =>
       regex.test(item.code) || regex.test(item.description));
   }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import {Subject} from 'rxjs';
 import { DepartmentI } from '../models/department.Interface';
 

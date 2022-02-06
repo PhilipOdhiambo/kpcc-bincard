@@ -1,34 +1,72 @@
 
-<div>
-    <button class=" btn cls-btn" (click)="onCancel()">&times;</button>
-    <h5>Receipt, Issue And Buffer Retrievals Report</h5>
-    <div class="report-head">
-        <div class="dates">
-            <label for="dates-start">Start Date:
-                <input #start type="date">
-            </label>
-            <label for="dates-end">End Date:
-                <input #end  type="date">
-            </label>
-        </div>
-        <div class="report-type">
-            <label for="report-type">Chose report Type:
-                <select #choice name="" id="" [formControl]="reportType">
-                    <option value="receipts">Receipts</option>
-                    <option value="issues">Issues</option>
-                    <option value="retrievals">Retrievals</option>
-                </select>
-            </label>
-        </div>
-        <div class="btn-download">
-            <button
+<div class="m-auto w-75" >
+
+    <button class="btn cls-btn" (click)="onCancel()">&times;</button>
+
+    <h1 class="m-3" style="font-size: 36px;">Receipt, Issue And Buffer Retrievals Report</h1>
+    <hr>
+
+    <div class="months pt-3 pb-2">
+        <label class="me-3">Start:
+            <select class="form-control" #month_start>
+                <option *ngFor="let month of months; let i=index"
+                    [selected]="date.getMonth()==i"
+                    value="{{i + 1}}">{{month}}</option>
+            </select>
+        </label>
+        <label>End:
+            <select class="form-control" #month_end>
+                <option *ngFor="let month of months; let i=index"
+                    [selected]="date.getMonth()==i"
+                    value="{{i + 1}}">{{month}}</option>
+            </select>
+        </label>
+    </div>
+    <div class="year mb-3">
+        <label>Year:
+            <select #year class="form-control">
+                <option value="{{date.getFullYear()}}">{{date.getFullYear()}}</option>
+                <option value="{{date.getFullYear() -1}}">
+                    {{date.getFullYear() -1}}</option>
+            </select>
+        </label>
+    </div>
+    <div>
+        <button class="btn btn-primary py-2 mb-2" (click)="getInventoryTransfers();">Fetcht Report</button>
+    </div>
+    <div class="table-container mb-3 p-2" 
+    style="height: 49vh; background: rgb(228, 228, 218);overflow-y: scroll;">
+        <table class="table">
+            <tr>
+                <th>Department Ordering</th>
+                <th>Department Issuing</th>
+                <th>S11 No.</th>
+                <th>Item Description</th>
+                <th>Quantity Ordered</th>
+                <th>Quantity Issued</th>
+                <th>Cost</th>
+            </tr>
+            <tr *ngFor="let transfer of transfers;">
+                <td>{{transfer.from}}</td>
+                <td>{{transfer.to}}</td>
+                <td>{{transfer.docRef}}</td>
+                <td>{{transfer.item}}</td>
+                <td>{{transfer.qtyOrdered}}</td>
+                <td>{{transfer.qtyOrdered}}</td>
+                <td>{{transfer.cost}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="download-report d-flex justify-content-center">
+        <button
+            class="btn btn-outline-primary"
+            [disabled]="!(transfers.length > 0)"
             (click)="onDownloadClick()">
-                Download</button>
-        </div>
-        <a>downoadLink</a>
+            <a >Export to Excel </a>
+            <img width="25" src="assets/icons/excel.svg" alt="Export to Excel">
+        </button>
     </div>
-    <div class="report-detail">
-        <retrievals [transfers]="transfers$"></retrievals>
- 
-    </div>
+
+
 </div>

@@ -1,0 +1,20 @@
+
+<div class=" container container-fluid border border-primary">
+  <div class="row">
+    <h2>NHIF Preaths</h2>
+  </div>
+<div class="row" style="height: 50vh; width: 95vw;">
+  <div class="patients col-md-2 bg-dark">
+    <input #input (input)="filterPatients(input.value)" type="text">
+    <div class="card" *ngFor="let patient of patient$.patientsFiltered | async;">
+      <div class="card-body">
+        <h5 class="card-title">{{patient.patient_name}}</h5>
+        <p class="card-text"></p>
+      </div>
+    </div>
+  </div>
+  <div class="patient-detail col-md-6 border border-success">
+    <button (click)="show()">Show</button>
+  </div>
+</div>
+</div>

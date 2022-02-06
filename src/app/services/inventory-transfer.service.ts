@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app'
 import { InventoryTransferI } from '../models/inventory-transfer.interface';
 
 
@@ -35,6 +35,10 @@ export class InventoryTransferService {
     })
   }
 
+  update(id: string, data: any) {
+    this.fsDb.collection(this.collection).doc(id).update(data)
+  }
+
 
   read(start: string, end: string) {
     return this.fsDb.collection(this.collection, ref => {
@@ -43,5 +47,7 @@ export class InventoryTransferService {
     }).valueChanges()
   }
 
-  
+
+
+
 }

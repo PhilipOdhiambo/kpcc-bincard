@@ -6,8 +6,8 @@
             <input #code type="text" required autocomplete="off" name="code" [(ngModel)]="newInventory.code"
                 (input)="flagDuplicateCode(code)">
         </div>
-        <div hidden class="code-exist text-danger" style="font-size: small;padding-left: 5.5rem;">
-            This code is already used!
+        <div [hidden]="duplicateCode" class="code-exist text-danger" style="font-size: small;padding-left: 5.5rem;">
+            Code is required and must not have duplicate*
         </div>
 
         <div class="field">

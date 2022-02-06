@@ -54,12 +54,10 @@ export class InventoryAddComponent implements OnInit {
 
   flagDuplicateCode(codeInput:HTMLInputElement) {
     const errorDiv:HTMLDivElement = document.querySelector(".code-exist.text-danger");
-    const duplicate = this.inventoryList.filter(inventory => inventory.code == codeInput.value);
+    const duplicate = this.inventoryList.filter(inventory => inventory.code != codeInput.value);
     if (duplicate.length > 0) {
-      errorDiv.hidden = false;
       this.duplicateCode = true;
     } else {
-      errorDiv.hidden = true;
       this.duplicateCode = false;
     }
 

@@ -1,8 +1,0 @@
-
-  
-    <td style="text-align: center;" [textContent]="index"></td>
-    <td [textContent]="detail.description"></td>
-    <td ><input style="border: none;background: none;" readonly type="text" ></td>
-    <td><input id="quantity" type="text"  required (input)="quantityBlur()" formControlName="quantity"></td>
-    <td  [textContent]="detail.value  | number:'.2'"></td>
-    <td> <button class="btn-remove" (click)="detailDelete()">&times;</button></td>

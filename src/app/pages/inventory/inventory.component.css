@@ -1,0 +1,126 @@
+.page {
+  background-color: #e6f4f1;
+  padding-top: 2rem;
+}
+
+.page .title {
+  padding-left: 2rem;
+  color: #ffffff;
+}
+
+.container {
+  margin: auto;
+  border-radius: 5px;
+  background-color: #0741a5;
+  padding: 0.5rem;
+}
+
+.container .row {
+  height: 74vh;
+  padding-bottom: 2rem;
+}
+
+.list {
+  height: 100%;
+  background-color: white;
+  margin: 10px;
+  margin-left: 2rem;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.list__header {
+  margin: 0 auto .5rem 55px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.list__header .icon {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  background-color: #0741a5;
+  -webkit-mask: url(/assets/icons/bars.svg) no-repeat center;
+          mask: url(/assets/icons/bars.svg) no-repeat center;
+}
+
+.list__header input {
+  border-style: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  width: 30%;
+  border: 1px solid #052458;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 0.2em;
+  padding: 0.3em;
+}
+
+.list__header button {
+  display: block;
+  margin-left: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #0741a5;
+  padding: .3em .5em;
+  color: #e6f4f1;
+  border-radius: 6px;
+  border-style: none;
+}
+
+.list__header button span {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  background-color: #e6f4f1;
+  -webkit-mask: url(/assets/add.svg) no-repeat center;
+          mask: url(/assets/add.svg) no-repeat center;
+}
+
+.list table {
+  border-style: none;
+  display: block;
+  overflow: auto;
+  height: 65vh;
+}
+
+.list table th,
+.list table td {
+  padding: 10px;
+  height: 1rem;
+}
+
+.list table thead tr {
+  background-color: #e6f4f1;
+}
+
+.list table tbody tr:nth-of-type(even) {
+  background-color: #e6f4f1;
+}
+
+.list table tbody tr:hover {
+  background-color: #af9e726e;
+  cursor: pointer;
+}
+
+.active-row {
+  background-color: #b4933a !important;
+  color: #e6f4f1;
+}
+
+.placeholder-div {
+  position: absolute;
+  top: 5rem;
+  background-color: #0741a5;
+  color: #fafafa;
+}
+/*# sourceMappingURL=inventory.component.css.map */
