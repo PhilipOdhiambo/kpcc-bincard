@@ -1,0 +1,26 @@
+
+nav {
+    font-size:1rem;
+    padding: 1rem .5rem;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+ul {
+list-style: none;
+padding: 0;
+margin: 0;
+display: flex;
+}
+li {
+padding: .3rem;
+}
+a {
+text-decoration: none;
+color: #fff !important;
+}
+a:hover {
+background-color: #fff;
+color: #333 !important;
+}

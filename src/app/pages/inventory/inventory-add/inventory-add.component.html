@@ -1,0 +1,40 @@
+<form #addForm="ngForm" class="inventory-detail-form" (ngSubmit)="addNewInventory(addForm)" action="#">
+    <h4>New Inventory</h4>
+    <div class="form-content">
+        <div class="field">
+            <label>Code</label>
+            <input #code type="text" required autocomplete="off" name="code" [(ngModel)]="newInventory.code"
+                (input)="flagDuplicateCode(code)">
+        </div>
+        <div [hidden]="duplicateCode" class="code-exist text-danger" style="font-size: small;padding-left: 5.5rem;">
+            Code is required and must not have duplicate*
+        </div>
+
+        <div class="field">
+            <label>Description</label>
+            <input type="text" required autocomplete="off" name="description" [(ngModel)]="newInventory.description">
+        </div>
+        <div class="field">
+            <label>Unit</label>
+            <input type="text" required autocomplete="off" name="unit" [(ngModel)]="newInventory.unit">
+        </div>
+        <div class="field">
+            <label>Buying</label>
+            <input type="text" (blur)="recalculate()" autocomplete="off" name="buying" [(ngModel)]="newInventory.buying">
+        </div>
+        <div class="field">
+            <label>Markup</label>
+            <input type="text" (blur)="recalculate()" autocomplete="off" name="markup" [(ngModel)]="newInventory.markup">
+        </div>
+        <div class="field">
+            <label>Selling</label>
+            <input type="text" autocomplete="off" name="selling" [(ngModel)]="newInventory.selling" >
+        </div>
+    </div>
+
+    <div class="form-edit">
+        <button type="submit" class="btn btn-success">Save</button>
+        <button (click)="resetFields()" style="font-weight: 500;" class="btn btn-outline-primary">Cancel</button>
+    </div>
+
+</form>

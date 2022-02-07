@@ -1,0 +1,69 @@
+
+<div class="container container-fluid border border-primary">
+  <div class="row">
+    <h2>NHIF Preaths</h2>
+  </div>
+  <div class="row" style="height: 50vh; width: 95vw;">
+    <div class="patients col-md-3 bg-dark">
+      <input class="form-control" #input
+        (input)="patient$.filterPatients(input.value)" type="text"
+        placeholder="Search name, hosp no. or phone ...">
+      <div class="card" *ngFor="let patient of patient$.patientsFiltered |
+        async; let i=index;">
+        <div class="card-body" (click)="showPatientDetail(i)">
+          <h5 class="card-title">{{patient.patient_name}}</h5>
+          <p class="card-text">Hosp no.{{patient.hospital_number}}</p>
+          <p class="card-text">Doctor: {{patient.doctor_name}}</p>
+          <p class="card-text"> Patient Tel: {{patient.contact_number}}</p>
+        </div>
+      </div>
+    </div>
+    <!-- Patient detail -->
+    <div *ngIf="activePatient" class="patient-detail col-md-6 border
+      border-success">
+      <div class="patientInfo">
+        <div class="form-group d-md-inline-block">
+          <label for="patient-name" class="form-label">patient Name: </label>
+          <input id="patient-name" class="form-control" type="text"
+            value="{{activePatient.patient_name}}">
+        </div>
+        <div class="form-group d-md-inline-block">
+          <label for="patient-name" class="form-label">Hospital Number: </label>
+          <input id="patient-name" class="form-control" type="text"
+            value="{{activePatient.hospital_number}}">
+        </div>
+        <div class="form-group d-md-inline-block">
+          <label for="patient-name" class="form-label">Mobile Number: </label>
+          <input id="patient-name" class="form-control" type="text"
+            value="{{activePatient.contact_number}}">
+        </div>
+        <div class="form-group d-md-inline-block">
+          <label for="patient-name" class="form-label">Alternative Contact:
+          </label>
+          <input id="patient-name" class="form-control" type="text"
+            value="{{activePatient.alternative_contact}}">
+        </div>
+        <div class="form-group d-md-inline-block">
+          <label for="patient-name" class="form-label">Primary Doctor: </label>
+          <input id="patient-name" class="form-control" type="text"
+            value="{{activePatient.doctor_name
+            }}">
+          <div class="form-group d-md-inline-block">
+            <label for="patient-name" class="form-label">Doctor Contact:
+            </label>
+            <input id="patient-name" class="form-control" type="text"
+              value="{{activePatient.doctor_contact
+              }}">
+          </div>
+          <div class="form-group d-md-inline-block">
+            <label for="patient-name" class="form-label">Admission Date:
+            </label>
+            <input id="patient-name" class="form-control" type="text"
+              value="{{activePatient.register_date
+              }}">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

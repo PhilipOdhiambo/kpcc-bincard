@@ -1,0 +1,111 @@
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 0.85rem;
+}
+
+.container {
+  height: inherit;
+  padding-left: 0.75rem;
+}
+
+.cls-btn {
+  float: right;
+  font-size: 1.2rem;
+  font-weight: bold;
+  outline: 1px solid red;
+  margin-right: 0.85rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(136, 193, 231, 0.938);
+  position: absolute;
+  max-height: 15rem;
+  overflow-y: auto;
+  left: 3.5rem;
+  z-index: 5;
+  left: inherit;
+  width: 15rem;
+  max-width: 15rem;
+}
+
+.list .list-item {
+  padding: 0;
+  margin: 0;
+}
+
+.list-item:nth-child(odd) {
+  background-color: #c4d6ee;
+}
+
+.list-item:hover {
+  color: #fff;
+}
+
+.details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+/* Set a fixed scrollable wrapper */
+.tableWrap {
+  height: 200px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  border-bottom: 2px solid #726f6f;
+  padding-bottom: 1rem;
+  overflow: auto;
+}
+
+.tableWrap table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: sans-serif;
+}
+
+.tableWrap table thead {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.tableWrap table thead tr th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 16px;
+  padding-left: 15px;
+  border-left: 1px dotted rgba(200, 209, 224, 0.6);
+  border-bottom: 1px solid #e8e8e8;
+  background: #ffc491;
+  text-align: left;
+}
+
+.tableWrap table tbody tr {
+  border-bottom: 2px solid #e8e8e8;
+}
+
+.tableWrap table tbody tr td {
+  padding: 5px 16px;
+}
+
+.tableWrap table tbody tr td input {
+  display: block;
+  border: none;
+  width: 100%;
+  background-color: #f0eccc;
+}
+
+.has-error {
+  border: 1px solid tomato !important;
+}
+/*# sourceMappingURL=order.component.css.map */

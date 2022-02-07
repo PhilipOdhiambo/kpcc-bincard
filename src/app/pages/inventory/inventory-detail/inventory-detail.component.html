@@ -1,0 +1,39 @@
+<form #detail class="inventory-detail-form" action="">
+    <div class="form-content">
+        <div class="field">
+            <label>Code</label>
+            <input type="text" readonly autocomplete="off" name="code"  [(ngModel)]="i.code">
+        </div>
+        <div class="field">
+            <label>Description</label>
+            <input type="text" readonly autocomplete="off" name="description" [(ngModel)]="i.description">
+        </div>
+        <div class="field">
+            <label>Unit</label>
+            <input type="text" readonly autocomplete="off" name="unit" [(ngModel)]="i.unit">
+        </div>
+        <div class="field">
+            <label>Buying</label>
+            <input type="text" readonly (blur)="recalculate()" autocomplete="off" name="buying" [(ngModel)]="i.buying">
+        </div>
+        <div class="field">
+            <label>Markup</label>
+            <input type="text" readonly (blur)="recalculate()" autocomplete="off" name="markup" [(ngModel)]="i.markup">
+        </div>
+        <div class="field">
+            <label>Selling</label>
+            <input type="text" readonly autocomplete="off" name="selling" [(ngModel)]="i.selling">
+        </div>
+    </div>
+
+    <div class="form-edit">
+        <button #edit (click)="editSave(edit)" class="btn btn-success">Edit</button>
+        <button disabled style="font-weight: 500;" class="btn btn-outline-primary">Undo</button>
+    </div>
+
+    <div class="form-delete">
+        <button class="btn btn-danger" (click)="deleteInventory()">Delete Item</button>
+
+    </div>
+   
+</form>

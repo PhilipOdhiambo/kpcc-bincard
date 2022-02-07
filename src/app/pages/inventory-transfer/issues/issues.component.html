@@ -1,0 +1,58 @@
+<div class="container">
+    <h1>Order Issuing</h1>
+    <hr>
+    <div class="main">
+        <div class="orders">
+            <div class="filter">
+                <div class="month">
+                    <label>Month</label>
+                    <select #month name="" (change)="read()">
+                        <option *ngFor="let month of months; let i=index" [selected]="date.getMonth()==i"
+                            value="{{i + 1}}">{{month}}</option>
+                    </select>
+                </div>
+                <div class="year">
+                    <label>Year</label>
+                    <select #year (change)="read()">
+                        <option value="{{date.getFullYear()}}">{{date.getFullYear()}}</option>
+                        <option value="{{date.getFullYear() -1}}">
+                            {{date.getFullYear() -1}}</option>
+                    </select>
+                </div>
+                <div class="from">
+                    <label>From</label>
+                    <select>
+                        <option value="df">All</option>
+                    </select>
+                </div>
+                <div class="to">
+                    <label>To</label>
+                    <select>
+                        <option value="">---All-----</option>
+                    </select>
+                </div>
+            </div>
+            <div class="orders-table">
+                <table>
+                    <tr>
+                        <th>Order#</th>
+                        <th>Depart Ordering</th>
+                        <th>No. Items</th>
+                    </tr>
+                    <tr *ngFor="let order of order$;let i=index;" (click)="clickOrder(i)"
+                    [class.active]="orderIndex==i">
+                        <td>{{i + 1}}</td>
+                        <td>{{order.departmentOrdering}}</td>
+                        <td>{{order.items.length}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div *ngFor="let order of order$; let i=index">
+ 
+            <issue *ngIf="orderIndex==i" [order]="order" (updated)="save($event)"></issue>
+        </div>
+        
+    </div>
+
+</div>

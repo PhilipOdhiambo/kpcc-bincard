@@ -1,0 +1,115 @@
+
+
+<div class="container m-auto w-75">
+    <div class="d-flex align-items-center">
+        <h2 class="flex-fill" > New S11</h2>
+        <span class="btn cls-btn" style="padding: 0;line-height: 1em;" (click)="onCancel()">&times;</span>
+        <hr>
+    </div>
+   
+    <form class="pt-3" [formGroup]="myForm" autocomplete="off">
+        <div class="head">
+            <label class="form-label me-4">Department Ordering:
+                <select class="form-control" formControlName="departmentOrdering"
+                    id="departmentOrdering">
+                    <option disabled selected hidden value=""> -- select --</option>
+                    <option *ngFor="let d of filteredDepartments"
+                        value="{{d.unitName}}">{{d.unitName}}</option>
+                </select>
+            </label>
+
+            <label class="form-label me-4"> Department Issuing:
+                <select class="form-control" formControlName="departmentIssuing"
+                    id="departmentIssuing">
+                    <option disabled selected hidden value=""> -- select --</option>
+                    <option *ngFor="let d of filteredDepartments"
+                        value="{{d.unitName}}">{{d.unitName}}</option>
+                </select>
+            </label>
+            <label class="me-2"> S11 No.:
+                <input class="form-control" formControlName="orderNumber" type="number">
+            </label>
+            <label style="margin-left:1rem">Date:
+                <input class="form-control" id="date" #date type="date" formControlName="orderTime">
+            </label>
+
+            <label style="display: block;margin-top: 1em;">Add Item(s):
+                <input class="form-control" id="drugSearch" #drugSearch
+                    type="text" (input)="filterDrugs(drugSearch.value)"
+                    (focus)="onClickInDrugInput()"
+                    (clickOutside)="onClickOutDrugInput()"
+                    placeholder="Search items here...">
+                <div class="list">
+                    <p class="list-item" *ngFor="let d of filteredDrugs;let
+                        i=index"
+                        (click)="onDrugClick(d, drugSearch)">
+                        <span
+                            style="display: inline-block;margin-right: 10px;">{{d.code}}</span><span>{{d.description}}</span>
+                    </p>
+                </div>
+            </label>
+        </div>
+        <div class="tableWrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 3%;">No</th>
+                        <th>Item Description</th>
+                        <th>Cost</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container formArrayName="items"
+                        *ngFor="let item of myForm.get('items')['controls']; let
+                        i=index;">
+                        <tr [formGroupName]="i"
+                            (delete)="spliceTransferDetail(i)">
+                            <td style="text-align: center;" [textContent]="i+1"></td>
+                            <td><input formControlName="description"
+                                    type="text"></td>
+                            <td><input formControlName="cost" readonly
+                                    type="text"></td>
+                            <td><input #qty type="text" required
+                                class="form-control"
+                                    style="background-color: white"
+                                    (input)="calculateLineValue(item)"
+                                    [class.has-error]="qty.invalid"
+                                    formControlName="qtyOrdered"></td>
+                            <td> <input type="text" formControlName="value"></td>
+                            <td> <button style="font-size: 18px;" class="btn
+                                    btn-outline-danger"
+                                    (click)="removeDetailRow(i)">&times;</button></td>
+                        </tr>
+                    </ng-container>
+
+                </tbody>
+            </table>
+
+            <div class="details">
+                <div class="details-summary">
+                    <label>Total:
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer">
+            <div *ngIf="myForm.invalid && myForm.touched" class="alert">
+                <p class="danger">*All fields are required*</p>
+            </div>
+            <button class="btn btn-success save-btn" style="padding: .4rem
+                .8rem; font-size: large;"
+                (click)="saveForm()">
+                Save
+            </button>
+            <button class="btn clr-btn" (click)="clearForm()">
+                Clear
+            </button>
+            <!-- [disabled]="!formDetails.length" -->
+        </div>
+
+    </form>
+</div>

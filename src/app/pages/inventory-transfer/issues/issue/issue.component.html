@@ -1,0 +1,46 @@
+
+
+<form [formGroup]="myform" (ngSubmit)="onSubmit(myform)">
+  <div class="order-from">
+    <label>Unit Ordering</label>
+    <input type="text" formControlName="departmentOrdering"
+    name="departmentOrdering"  >
+  </div>
+  <div class="order-to">
+    <label>Unit Issuing</label>
+    <input type="text" formControlName="departmentIssuing"
+    name="departmentIssuing" >
+  </div>
+  <div class="order-number">
+    <label>Order Number</label>
+    <input type="text" name="orderNumber" formControlName="orderNumber"
+    value="{{order.orderNumber}}"> 
+  </div>
+  <div class="table" style="overflow: scroll; height: 60vh;">
+    <table id="tb">
+      <tr>
+        <td>Code.</td>
+        <td>Description</td>
+        <td>Qty Ordered</td>
+        <td>Qty Isssued</td>
+        <td>Value</td>
+      </tr>
+      <ng-container [formArrayName]="'items'">
+        <tr [formGroupName]="i" *ngFor="let item of order.items; let i=index;">
+          <td>{{item.code}}</td>
+          <td>{{item.description}}</td>
+          <td>{{item.qtyOrdered}}</td>
+          <td><input #issued style="width: max-content;"
+              formControlName="qtyIssued"
+              >
+          </td>
+          <td>{{(item.cost * issued.value) | currency }}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+  <div style="text-align: center;" class="save">
+    <input class="form-control" 
+      type="submit" value="Save">
+  </div>
+</form>

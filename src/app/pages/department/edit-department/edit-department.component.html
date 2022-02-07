@@ -1,0 +1,31 @@
+<div class="edit-department">
+
+    <div class="form-container">
+        <div class="close" (click)="editDepartmentClose()"></div>
+        <form #form="ngForm" (ngSubmit)="submit(form)">
+           
+            <h2>Edit Unit</h2>
+
+            <label class="custom-field">
+                <input required type="text" name="unitName" [(ngModel)]="unitName">
+                <span class="place-holder">Unit Name</span>
+            </label>
+
+            <label class="custom-field">
+                <input required type="text" name="department" [(ngModel)]="department">
+                <span class="place-holder">Department</span>
+            </label>
+
+            <label class="custom-field">
+                <input required type="text" name="category" [(ngModel)]="category">
+                <span class="place-holder">Category</span>
+            </label>
+            
+            <div class="submit">
+                <button  type="submit" class="btn">Submit</button>
+            </div>
+    
+        </form>
+
+    </div>
+</div>

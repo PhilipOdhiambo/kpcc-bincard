@@ -1,0 +1,18 @@
+<div class="delete-alert">
+    <div class="delete-container">
+        <span class="close" (click)="response(false)"></span>
+        <div class="delete">
+            <h3>Are Your Sure?</h3>
+            <p>Deleting resource is Ireversible</p>
+            <p style="font-weight: bold; text-align: center;">Please Confirm</p>
+            <div class="response">
+
+                <button class="response__cancel btn btn-primary"
+                    (click)="response(false)">Back</button>
+
+                <button class="response__delete btn btn-danger"
+                    (click)="response(true)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
