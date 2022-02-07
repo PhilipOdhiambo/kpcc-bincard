@@ -13,14 +13,14 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 import { PreauthsComponent } from './pages/preauthModule/components/preauths/preauths.component';
 
 const routes:Routes = [   
-    {path:'home', component: HomePageComponent },
+    {path:'', component: HomePageComponent },
     { path:'add-receipt', component: ReceiptsComponent },
     { path:'add-issue', component: IssuesComponent },
     { path: 'reports', component: ReportsComponent},
     { path: 'departments', component: DepartmentComponent},
     { path: 'inventory', component: InventoryComponent},
     {path: 'preauths', component: PreauthsComponent},
-    { path: '**', redirectTo:'home', pathMatch: 'full'}
+    { path: '**', redirectTo:'', pathMatch: 'full'}
 ];
 
 @NgModule({
