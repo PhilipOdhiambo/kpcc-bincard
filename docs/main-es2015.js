@@ -552,14 +552,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
-    { path: 'home', component: _pages_home_page_home_page_component__WEBPACK_IMPORTED_MODULE_2__["HomePageComponent"] },
+    { path: '', component: _pages_home_page_home_page_component__WEBPACK_IMPORTED_MODULE_2__["HomePageComponent"] },
     { path: 'add-receipt', component: _pages_inventory_transfer_order_order_component__WEBPACK_IMPORTED_MODULE_3__["ReceiptsComponent"] },
     { path: 'add-issue', component: _pages_inventory_transfer_issues_issues_component__WEBPACK_IMPORTED_MODULE_4__["IssuesComponent"] },
     { path: 'reports', component: _pages_reports_reports_component__WEBPACK_IMPORTED_MODULE_5__["ReportsComponent"] },
     { path: 'departments', component: _pages_department_department_component__WEBPACK_IMPORTED_MODULE_6__["DepartmentComponent"] },
     { path: 'inventory', component: _pages_inventory_inventory_component__WEBPACK_IMPORTED_MODULE_7__["InventoryComponent"] },
     { path: 'preauths', component: _pages_preauthModule_components_preauths_preauths_component__WEBPACK_IMPORTED_MODULE_8__["PreauthsComponent"] },
-    { path: '**', redirectTo: 'home', pathMatch: 'full' }
+    { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 class AppRoutingModule {
 }
