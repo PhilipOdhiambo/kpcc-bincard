@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { PatientI } from './patient.interface';
 
 @Injectable({
@@ -33,7 +32,7 @@ export class PatientService {
       return;
     }
     const temp = patients.filter(patient => {
-      return (patient.name.toLowerCase().includes(filter.toLowerCase()))
+      return (patient.patient_name.toLowerCase().includes(filter.toLowerCase()))
     })
     this.patientsFiltered.next(temp)
   }
