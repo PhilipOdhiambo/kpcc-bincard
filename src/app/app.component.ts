@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { DepartmentService } from './services/department.service';
 import { InventoryTransferService } from './services/inventory-transfer.service';
-import { InventoryService } from './services/inventory.service';
 
 @Component({
   selector: 'app-root',

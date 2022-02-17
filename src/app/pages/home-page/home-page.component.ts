@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DepartmentService } from '../../services/department.service';
 
 @Component({
   selector: 'home-page',
@@ -8,7 +7,7 @@ import { DepartmentService } from '../../services/department.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private departmentServie:DepartmentService) { }
+  constructor() { }
 
   ngOnInit(): void {
     //this.departmentServie.createDepartment();
