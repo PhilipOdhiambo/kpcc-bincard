@@ -13,7 +13,7 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 import { PreauthsComponent } from './pages/preauthModule/components/preauths/preauths.component';
 
 const routes:Routes = [   
-    {path:'', component: HomePageComponent },
+    {path:'home', component: HomePageComponent },
     { path:'add-receipt', component: ReceiptsComponent },
     { path:'add-issue', component: IssuesComponent },
     { path: 'reports', component: ReportsComponent},
