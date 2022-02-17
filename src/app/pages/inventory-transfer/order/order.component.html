@@ -2,50 +2,82 @@
 
 <div class="container m-auto w-75">
     <div class="d-flex align-items-center">
-        <h2 class="flex-fill" > New S11</h2>
-        <span class="btn cls-btn" style="padding: 0;line-height: 1em;" (click)="onCancel()">&times;</span>
+        <h2 class="flex-fill"> New S11</h2>
+        <span class="btn cls-btn" style="padding: 0;line-height: 1em;"
+            (click)="onCancel()">&times;</span>
         <hr>
     </div>
-   
+
     <form class="pt-3" [formGroup]="myForm" autocomplete="off">
         <div class="head">
-            <label class="form-label me-4">Department Ordering:
-                <select class="form-control" formControlName="departmentOrdering"
-                    id="departmentOrdering">
-                    <option disabled selected hidden value=""> -- select --</option>
-                    <option *ngFor="let d of filteredDepartments"
-                        value="{{d.unitName}}">{{d.unitName}}</option>
-                </select>
+            <label class="form-label me-4"> Department Ordering:
+                <div class="input-field">
+                    <input #deptOrdering class="form-control" type="text"
+                        (input)="getDepartmentOrdering($event)"
+                        (blur)="blurDepartmentInputs($event)"
+                        formControlName="departmentOrdering"
+                        [(ngModel)]="deptOrdering.value"
+                        placeholder="Start typing to find...">
+                    <div class="dropdown">
+                        <p class="my-1 ms-1" *ngFor="let d of
+                            departmentsOrdering"
+                            (click)="deptOrdering.value=d.unitName;
+                            departmentsOrdering=[]">
+                            {{d.unitName}}
+                        </p>
+                    </div>
+                </div>
+            </label>
+            <label class="form-label me-4"> Department Issuing:
+                <div class="input-field">
+                    <input #deptIssuing class="form-control" type="text"
+                        (input)="getDepartmentIssuing($event)"
+                        (blur)="blurDepartmentInputs($event)"
+                        formControlName="departmentIssuing"
+                        [(ngModel)]="deptIssuing.value"
+                        placeholder="Start typing to find...">
+                    <div class="dropdown">
+                        <p class="my-1 ms-1" *ngFor="let d of
+                            departmentsIssuing"
+                            (click)="deptIssuing.value=d.unitName;
+                            departmentsIssuing=[]">
+                            {{d.unitName}}
+                        </p>
+                    </div>
+                </div>
             </label>
 
-            <label class="form-label me-4"> Department Issuing:
-                <select class="form-control" formControlName="departmentIssuing"
-                    id="departmentIssuing">
-                    <option disabled selected hidden value=""> -- select --</option>
-                    <option *ngFor="let d of filteredDepartments"
-                        value="{{d.unitName}}">{{d.unitName}}</option>
-                </select>
-            </label>
             <label class="me-2"> S11 No.:
-                <input class="form-control" formControlName="orderNumber" type="number">
+                <input class="form-control" formControlName="orderNumber"
+                    type="number">
             </label>
             <label style="margin-left:1rem">Date:
-                <input class="form-control" id="date" #date type="date" formControlName="orderTime">
+                <input class="form-control" id="date" #date type="date"
+                    formControlName="orderTime">
             </label>
 
             <label style="display: block;margin-top: 1em;">Add Item(s):
-                <input class="form-control" id="drugSearch" #drugSearch
-                    type="text" (input)="filterDrugs(drugSearch.value)"
-                    (focus)="onClickInDrugInput()"
-                    (clickOutside)="onClickOutDrugInput()"
-                    placeholder="Search items here...">
-                <div class="list">
-                    <p class="list-item" *ngFor="let d of filteredDrugs;let
-                        i=index"
-                        (click)="onDrugClick(d, drugSearch)">
-                        <span
-                            style="display: inline-block;margin-right: 10px;">{{d.code}}</span><span>{{d.description}}</span>
-                    </p>
+                <div style="width: 500px; position: relative;">
+                    <input #drugSearch class="form-control" type="text"
+                        (input)="filterDrugs(drugSearch.value)"
+                        (blur)="blurDrugInput($event)"
+                        placeholder="Start typing here...">
+                    <div class="dropdown">
+                        <p class="my-1 ms-1" *ngFor="let d of drugs;let
+                            i=index"
+                            (click)="onDrugClick(d,
+                            drugSearch);drugSearch.value=''">
+                            <span
+                                style="display: inline-block;margin-right:
+                                10px;">{{d.code}}</span><span>{{d.description}}</span>
+                        </p>
+                        <p *ngIf="!drugs.length && drugSearch.value">
+                            This item does not exist:
+                            <a class="btn btn-info" href="/inventory" target="_blank">
+                                Add it to Inventory
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </label>
         </div>
@@ -65,15 +97,14 @@
                     <ng-container formArrayName="items"
                         *ngFor="let item of myForm.get('items')['controls']; let
                         i=index;">
-                        <tr [formGroupName]="i"
-                            (delete)="spliceTransferDetail(i)">
+                        <tr [formGroupName]="i">
                             <td style="text-align: center;" [textContent]="i+1"></td>
                             <td><input formControlName="description"
                                     type="text"></td>
                             <td><input formControlName="cost" readonly
                                     type="text"></td>
                             <td><input #qty type="text" required
-                                class="form-control"
+                                    class="form-control"
                                     style="background-color: white"
                                     (input)="calculateLineValue(item)"
                                     [class.has-error]="qty.invalid"

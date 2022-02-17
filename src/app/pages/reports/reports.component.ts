@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, Subscription, Subject } from 'rxjs';
+import {Subscription, Subject } from 'rxjs';
 import { Issue, Receipt } from '../../models/types';
 import * as XLSX from 'xlsx';  // To export the report to excel
 import { InventoryTransferService } from 'src/app/services/inventory-transfer.service';
@@ -23,14 +23,10 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   date = new Date()
 
   // Subscriptions
-
   transferSub: Subscription = new Subscription()
-
   downloadLink: string
-
   filteredReceipts: Array<Receipt> = [];
   filteredIssues: Array<Issue> = [];
-  reportToShow = [];
 
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
     "October", "November", "December"];
@@ -42,15 +38,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-
-
-  get getReportToShow() {
-    return this.reportToShow;
-  }
-
   ngOnInit(): void {
-
-
   }
 
 
@@ -72,15 +60,16 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
     res.forEach((range: any) => {
       range.data.forEach((order: InventoryTransferI) => {
         order.items.forEach((item: TransferDetailI) => {
-          data.push({
-            from: order.departmentOrdering,
-            to: order.departmentIssuing,
-            docRef: "S11. " + order.orderNumber,
+          let temp:any = {
+            "Department Ordering": order.departmentOrdering,
+            "Department Issuing": order.departmentIssuing,
+            "S11 No.": order.orderNumber,
             item: item.description,
-            qtyOrdered: item.qtyOrdered,
-            qtyIssued: item.qtyIssued,
-            cost: item.cost
-          })
+            cost: parseFloat(parseFloat(item.cost).toFixed(2)),
+            quantity: parseInt(item.qtyOrdered),          
+          }
+          temp.total = parseFloat((temp.cost * temp.quantity).toFixed(2))
+          data.push(temp)
         })
       });
     })
@@ -106,11 +95,6 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onDownloadClick() {
     /* Download report to xlsx */ 
-    let header = [{
-      from: "Ordering", to: "Issuing", docRef: "S11 No.",
-      item: "Item Description", qtyOrdered: "Ordered", qtyIssued: "Issued", cost: "Unit Cost"
-    }];
-
     const workbook = XLSX.utils.book_new(); // Create a new workbook
     // Create sheet with headers, add data and append to workbook
     XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(this.transfers), 'sheet1');

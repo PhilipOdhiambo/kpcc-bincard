@@ -1,16 +1,10 @@
-* {
-  padding: 0;
-  margin: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  font-size: 0.85rem;
-}
 
 .container {
   height: inherit;
   padding-left: 0.75rem;
 }
 
+/* close button */
 .cls-btn {
   float: right;
   font-size: 1.2rem;
@@ -19,45 +13,33 @@
   margin-right: 0.85rem;
 }
 
-.list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background-color: rgba(136, 193, 231, 0.938);
+/* Input fields */
+.input-field {
+  position: relative;
+  width: 200px;
+}
+
+/* Search dropdowns */
+.dropdown {
   position: absolute;
-  max-height: 15rem;
+  display: inline-block;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  background-color: #fffaf6;
+  max-height: 200px;
   overflow-y: auto;
-  left: 3.5rem;
+  width: 100%;
   z-index: 5;
-  left: inherit;
-  width: 15rem;
-  max-width: 15rem;
+}
+.dropdown p {
+  padding: 4px 0;
+}
+.dropdown p:hover {
+  background-color: rgb(243, 235, 235);
 }
 
-.list .list-item {
-  padding: 0;
-  margin: 0;
-}
 
-.list-item:nth-child(odd) {
-  background-color: #c4d6ee;
-}
-
-.list-item:hover {
-  color: #fff;
-}
-
-.details {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-/* Set a fixed scrollable wrapper */
+/* Table css */
 .tableWrap {
   height: 200px;
   margin-top: .5rem;
@@ -66,18 +48,15 @@
   padding-bottom: 1rem;
   overflow: auto;
 }
-
 .tableWrap table {
   border-collapse: collapse;
   width: 100%;
   font-family: sans-serif;
 }
-
 .tableWrap table thead {
   font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
 }
-
 .tableWrap table thead tr th {
   position: -webkit-sticky;
   position: sticky;
@@ -89,7 +68,6 @@
   background: #ffc491;
   text-align: left;
 }
-
 .tableWrap table tbody tr {
   border-bottom: 2px solid #e8e8e8;
 }
@@ -108,4 +86,3 @@
 .has-error {
   border: 1px solid tomato !important;
 }
-/*# sourceMappingURL=order.component.css.map */

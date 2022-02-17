@@ -755,7 +755,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     var routes = [{
-      path: 'home',
+      path: '',
       component: _pages_home_page_home_page_component__WEBPACK_IMPORTED_MODULE_2__["HomePageComponent"]
     }, {
       path: 'add-receipt',
@@ -777,7 +777,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       component: _pages_preauthModule_components_preauths_preauths_component__WEBPACK_IMPORTED_MODULE_8__["PreauthsComponent"]
     }, {
       path: '**',
-      redirectTo: 'home',
+      redirectTo: '',
       pathMatch: 'full'
     }];
 
