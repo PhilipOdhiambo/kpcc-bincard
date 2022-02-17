@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import Inventory, { InventoryI } from 'src/app/models/inventory';
-import { InventoryService } from 'src/app/services/inventory.service';
+import Inventory, { InventoryI } from 'src/app/pages/inventoryModule/models/inventory';
+import { InventoryService } from '../../models/inventory.service';
 
 @Component({
   selector: 'inventory-detail',

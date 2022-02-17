@@ -8,8 +8,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ReceiptsComponent } from './pages/inventory-transfer/order/order.component';
 import { IssuesComponent } from './pages/inventory-transfer/issues/issues.component';
 import { ReportsComponent } from './pages/reports/reports.component';
-import { DepartmentComponent } from './pages/department/department.component';
-import { InventoryComponent } from './pages/inventory/inventory.component';
+import { DepartmentComponent } from './pages/deparmentModule/components/department/department.component';
+import { InventoryComponent } from './pages/inventoryModule/components/inventory/inventory.component';
 import { PreauthsComponent } from './pages/preauthModule/components/preauths/preauths.component';
 
 const routes:Routes = [   
