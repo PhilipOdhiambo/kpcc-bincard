@@ -1,0 +1,53 @@
+[debug] [2022-02-17T09:11:20.961Z] ----------------------------------------------------------------------
+[debug] [2022-02-17T09:11:20.964Z] Command:       /usr/bin/node /usr/bin/firebase emulators:start
+[debug] [2022-02-17T09:11:20.964Z] CLI Version:   9.23.0
+[debug] [2022-02-17T09:11:20.964Z] Platform:      linux
+[debug] [2022-02-17T09:11:20.965Z] Node Version:  v14.18.3
+[debug] [2022-02-17T09:11:20.965Z] Time:          Thu Feb 17 2022 12:11:20 GMT+0300 (East Africa Time)
+[debug] [2022-02-17T09:11:20.965Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-02-17T09:11:21.030Z] Field ".hosting" in "firebase.json" is possibly invalid: should be object
+[debug] [2022-02-17T09:11:21.031Z] Object ".hosting[0]" in "firebase.json" is missing required property: {"missingProperty":"target"}
+[debug] [2022-02-17T09:11:21.031Z] Object ".hosting[0]" in "firebase.json" is missing required property: {"missingProperty":"site"}
+[debug] [2022-02-17T09:11:21.031Z] Field ".hosting[0]" in "firebase.json" is possibly invalid: should match some schema in anyOf
+[debug] [2022-02-17T09:11:21.031Z] Field ".hosting" in "firebase.json" is possibly invalid: should match some schema in anyOf
+[debug] [2022-02-17T09:11:21.035Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-02-17T09:11:21.035Z] > authorizing via signed-in user (jofonowino@gmail.com)
+[info] i  emulators: Starting emulators: hosting {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: hosting"}}
+[debug] [2022-02-17T09:11:21.085Z] [hub] writing locator at /tmp/hub-bincard-kpcc.json
+[debug] [2022-02-17T09:11:21.245Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/bincard-kpcc/sites 
+[debug] [2022-02-17T09:11:23.354Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/bincard-kpcc/sites 200
+[debug] [2022-02-17T09:11:23.355Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/bincard-kpcc/sites {"sites":[{"name":"projects/886093320220/sites/bincard-kpcc","defaultUrl":"https://bincard-kpcc.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2022-02-17T09:11:23.355Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/bincard-kpcc/webApps/-/config [none]
+[debug] [2022-02-17T09:11:24.490Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/bincard-kpcc/webApps/-/config 200
+[debug] [2022-02-17T09:11:24.490Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/bincard-kpcc/webApps/-/config {"projectId":"bincard-kpcc","appId":"1:886093320220:web:8195b4fb1981005db44fd9","databaseURL":"https://bincard-kpcc.firebaseio.com","storageBucket":"bincard-kpcc.appspot.com","locationId":"us-central","apiKey":"AIzaSyCukcJCIIXwGV4CZplo34uEdnL0HWfvKJM","authDomain":"bincard-kpcc.firebaseapp.com","messagingSenderId":"886093320220","measurementId":"G-YHWCQW160S"}
+[info] i  hosting: Serving hosting files from: dist/bincard-kpcc {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist/bincard-kpcc\u001b[22m"}}
+[info] ✔  hosting: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
+[info] i  hosting[bincard-kpcc]: Serving hosting files from: dist/bincard-kpcc {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist/bincard-kpcc\u001b[22m"}}
+[info] ✔  hosting[bincard-kpcc]: Local server: http://localhost:5005 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5005\u001b[22m\u001b[24m"}}
+[warn] ⚠  emulators: The Emulator UI requires a project ID to start. Configure your default project with 'firebase use' or pass the --project flag. {"metadata":{"emulator":{"name":"hub"},"message":"The Emulator UI requires a project ID to start. Configure your default project with 'firebase use' or pass the --project flag."}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+└─────────────────────────────────────────────────────────────┘
+
+┌──────────┬────────────────┐
+│ Emulator │ Host:Port      │
+├──────────┼────────────────┤
+│ Hosting  │ localhost:5000 │
+└──────────┴────────────────┘
+  Emulator Hub running at localhost:4400
+  Other reserved ports: None
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[info] i  hosting: 127.0.0.1 - - [17/Feb/2022:09:13:22 +0000] "GET / HTTP/1.1" 200 1409 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Feb/2022:09:13:22 +0000] \"GET / HTTP/1.1\" 200 1409 \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Feb/2022:09:13:22 +0000] "GET /runtime-es2015.js HTTP/1.1" 200 6306 "http://localhost:5000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Feb/2022:09:13:22 +0000] \"GET /runtime-es2015.js HTTP/1.1\" 200 6306 \"http://localhost:5000/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Feb/2022:09:13:22 +0000] "GET /polyfills-es2015.js HTTP/1.1" 200 144785 "http://localhost:5000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Feb/2022:09:13:22 +0000] \"GET /polyfills-es2015.js HTTP/1.1\" 200 144785 \"http://localhost:5000/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Feb/2022:09:13:22 +0000] "GET /styles-es2015.js HTTP/1.1" 200 146701 "http://localhost:5000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Feb/2022:09:13:22 +0000] \"GET /styles-es2015.js HTTP/1.1\" 200 146701 \"http://localhost:5000/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Feb/2022:09:13:22 +0000] "GET /main-es2015.js HTTP/1.1" 200 538542 "http://localhost:5000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Feb/2022:09:13:22 +0000] \"GET /main-es2015.js HTTP/1.1\" 200 538542 \"http://localhost:5000/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Feb/2022:09:13:23 +0000] "GET /vendor-es2015.js HTTP/1.1" 200 7405869 "http://localhost:5000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Feb/2022:09:13:23 +0000] \"GET /vendor-es2015.js HTTP/1.1\" 200 7405869 \"http://localhost:5000/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Feb/2022:09:13:23 +0000] "GET /drug_pic.jpg HTTP/1.1" 200 240888 "http://localhost:5000/home" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Feb/2022:09:13:23 +0000] \"GET /drug_pic.jpg HTTP/1.1\" 200 240888 \"http://localhost:5000/home\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Feb/2022:09:13:24 +0000] "GET /favicon.ico HTTP/1.1" 200 948 "http://localhost:5000/home" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Feb/2022:09:13:24 +0000] \"GET /favicon.ico HTTP/1.1\" 200 948 \"http://localhost:5000/home\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Feb/2022:09:13:29 +0000] "GET /add-receipt HTTP/1.1" 200 1409 "http://localhost:5000/home" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Feb/2022:09:13:29 +0000] \"GET /add-receipt HTTP/1.1\" 200 1409 \"http://localhost:5000/home\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Feb/2022:09:13:59 +0000] "GET /add-issue HTTP/1.1" 200 1409 "http://localhost:5000/home" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Feb/2022:09:13:59 +0000] \"GET /add-issue HTTP/1.1\" 200 1409 \"http://localhost:5000/home\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\""}}

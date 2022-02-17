@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DepartmentI } from 'src/app/models/department.Interface';
-import { DepartmentService } from 'src/app/services/department.service';
+import { DepartmentService } from '../../models/department.service';
 
 @Component({
   selector: 'add-department',

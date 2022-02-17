@@ -32,7 +32,7 @@
         </label>
     </div>
     <div>
-        <button class="btn btn-primary py-2 mb-2" (click)="getInventoryTransfers();">Fetcht Report</button>
+        <button class="btn btn-primary py-2 mb-2" (click)="getInventoryTransfers();">Fetch Report</button>
     </div>
     <div class="table-container mb-3 p-2" 
     style="height: 49vh; background: rgb(228, 228, 218);overflow-y: scroll;">
@@ -42,18 +42,18 @@
                 <th>Department Issuing</th>
                 <th>S11 No.</th>
                 <th>Item Description</th>
-                <th>Quantity Ordered</th>
-                <th>Quantity Issued</th>
-                <th>Cost</th>
+                <th>Unit cost</th>
+                <th>Quantity</th>
+                <th>Total</th>
             </tr>
             <tr *ngFor="let transfer of transfers;">
-                <td>{{transfer.from}}</td>
-                <td>{{transfer.to}}</td>
-                <td>{{transfer.docRef}}</td>
+                <td>{{transfer["Department Ordering"]}}</td>
+                <td>{{transfer["Department Issuing"]}}</td>
+                <td>{{transfer["S11 No."]}}</td>
                 <td>{{transfer.item}}</td>
-                <td>{{transfer.qtyOrdered}}</td>
-                <td>{{transfer.qtyOrdered}}</td>
                 <td>{{transfer.cost}}</td>
+                <td>{{transfer.quantity}}</td>
+                <td>{{transfer.total}}</td>
             </tr>
         </table>
     </div>
