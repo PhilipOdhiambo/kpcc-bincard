@@ -33,6 +33,9 @@ import { InventoryAddComponent } from './pages/inventoryModule/components/invent
 import { InventoryTransferComponent } from './pages/inventory-transfer/inventory-transfer.component';
 import { IssueComponent } from './pages/inventory-transfer/issues/issue/issue.component';
 import { PreauthsComponent } from './pages/preauthModule/components/preauths/preauths.component';
+import { ReceiptReportComponent } from './pages/reports/receipt-report/receipt-report.component';
+import { IssueReportComponent } from './pages/reports/issue-report/issue-report.component';
+import { RetrievalReportComponent } from './pages/reports/retrieval-report/retrieval-report.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { PreauthsComponent } from './pages/preauthModule/components/preauths/pre
     InventoryTransferComponent,
     IssueComponent,
     PreauthsComponent,
+    ReceiptReportComponent,
+    IssueReportComponent,
+    RetrievalReportComponent,
   ],
   imports: [
     BrowserModule,

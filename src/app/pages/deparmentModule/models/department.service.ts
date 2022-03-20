@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase';
-import { BehaviorSubject, from, Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { DepartmentI } from 'src/app/models/department.Interface';
 
 @Injectable({

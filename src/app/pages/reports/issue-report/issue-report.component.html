@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row table-row">
+    <table #table class="table">
+      <thead style="position: sticky;top: -10px;background-color: rgb(226, 213, 213);">
+        <tr>
+          <th>Issued To</th>
+          <th>S11 No.</th>
+          <th>Item Description</th>
+          <th>Quantity</th>
+          <th>Unit cost</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let issue of issues">
+          <td>{{issue["Department Ordering"]}}</td>
+          <td>{{issue["S11 No."]}}</td>
+          <td>{{issue.item}}</td>
+          <td>{{issue.quantity}}</td>
+          <td>{{issue.cost | currency :'' :'' : "0.2-2"}}</td>
+          <td>{{(issue.cost * issue.quantity) | currency :'' :'' :"0.2-2"}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div> <!-- end table-row -->
+
+  <div class="row row-analyze" style="position: sticky;bottom: -10px;">
+    <div class="col">
+      <button class="btn btn-primary form-control"  (click)="analyzeReport()">
+        Analyze Items Issued
+        <img width="25" src="assets/icons/excel.svg" alt="Export to Excel">
+      </button>
+    </div>
+  </div><!-- end row-analyze -->
+  
+</div>

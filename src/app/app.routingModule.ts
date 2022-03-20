@@ -20,7 +20,7 @@ const routes:Routes = [
     { path: 'departments', component: DepartmentComponent},
     { path: 'inventory', component: InventoryComponent},
     {path: 'preauths', component: PreauthsComponent},
-    { path: '**', redirectTo:'', pathMatch: 'full'}
+    { path: '**', redirectTo:'home', pathMatch: 'full'}
 ];
 
 @NgModule({

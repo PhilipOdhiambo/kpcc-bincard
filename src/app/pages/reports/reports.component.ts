@@ -5,6 +5,8 @@ import { Issue, Receipt } from '../../models/types';
 import * as XLSX from 'xlsx';  // To export the report to excel
 import { InventoryTransferService } from 'src/app/services/inventory-transfer.service';
 import { InventoryTransferI, TransferDetailI } from 'src/app/models/inventory-transfer.interface';
+import { DepartmentI } from 'src/app/models/department.Interface';
+import { DepartmentService } from '../deparmentModule/models/department.service';
 
 @Component({
   selector: 'reports',
@@ -14,12 +16,16 @@ import { InventoryTransferI, TransferDetailI } from 'src/app/models/inventory-tr
 export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
-  @ViewChild('month_start') month_start: ElementRef;
-  @ViewChild('month_end') month_end: ElementRef;
+  @ViewChild('month') month: ElementRef;
   @ViewChild('year') year: ElementRef;
+  @ViewChild('departmentReporting') departmentReporting: ElementRef;
+  @ViewChild('reportOn') reportOn: ElementRef;
+
+  reportType = ''
 
   transfers = []
   transfers$: Subject<any> = new Subject()
+  departments: DepartmentI [] = []
   date = new Date()
 
   // Subscriptions
@@ -33,23 +39,23 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private inventoryTransferService: InventoryTransferService,
+    private deparmentService: DepartmentService,
     private router: Router, private activeRoute: ActivatedRoute,
   ) {
   }
 
 
   ngOnInit(): void {
+    this.deparmentService.department$.subscribe(departments => this.departments = departments);
   }
 
 
   getInventoryTransfers() {
     let year = (this.year.nativeElement as HTMLSelectElement).value;
-    let start_month = (this.month_start.nativeElement as HTMLSelectElement).value;
-    let end_month = (this.month_end.nativeElement as HTMLSelectElement).value;
-    let startInput = year + "-" + start_month;
-    let endInput = year + "-" + end_month;
+    let month = (this.month.nativeElement as HTMLSelectElement).value;
+    let period = year + "-" + month;
     this.transferSub.unsubscribe();
-    this.transferSub = this.inventoryTransferService.read(startInput, endInput).subscribe((res: any[]) => {
+    this.transferSub = this.inventoryTransferService.read(period, period).subscribe((res: any[]) => {
 
     let data = []
     if (!res.length) {
@@ -57,6 +63,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.transfers = [];
       return;
     }
+    this.reportType = (this.reportOn.nativeElement as HTMLSelectElement).value
     res.forEach((range: any) => {
       range.data.forEach((order: InventoryTransferI) => {
         order.items.forEach((item: TransferDetailI) => {
@@ -66,7 +73,8 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
             "S11 No.": order.orderNumber,
             item: item.description,
             cost: parseFloat(parseFloat(item.cost).toFixed(2)),
-            quantity: parseInt(item.qtyOrdered),          
+            quantity: parseInt(item.qtyOrdered),
+            date: order.orderTime         
           }
           temp.total = parseFloat((temp.cost * temp.quantity).toFixed(2))
           data.push(temp)
@@ -75,6 +83,24 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
     })
       this.transfers = data;
     })
+  }
+
+
+  getReceipts() {
+    let departmentReporting = this.departmentReporting.nativeElement.value
+    return this.transfers
+    .filter(transfer => transfer['Department Ordering'] == departmentReporting ) 
+  }
+
+  getIssues() {
+    let departmentReporting = this.departmentReporting.nativeElement.value
+    return this.transfers
+    .filter(transfer => transfer['Department Issuing'] == departmentReporting )
+  }
+
+  getRetrievals(){
+    return this.transfers
+    .filter(transfer => transfer['Department Ordering'] == transfer['Department Issuing'])
   }
 
 
