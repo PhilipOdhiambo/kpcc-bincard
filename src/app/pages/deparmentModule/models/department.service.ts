@@ -30,13 +30,10 @@ export class DepartmentService {
   }
 
 
+
+
   getDepartments() {
-    this.db.collection(this.collection).valueChanges()
-      .subscribe((result: any) => {
-        this.department$.next([...result[0].data])
-        this.departments = result[0].data;
-        this.departmentsFiltered.next(result[0].data);
-      });
+    return this.db.collection(this.collection).valueChanges()
   }
 
 

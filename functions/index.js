@@ -1,29 +1,33 @@
 
-const functions = require("firebase-functions")
-const { google } = require("googleapis")
-const app = require('express')();
-const mongoose = require('mongoose')
+import functions from "firebase-functions"
+import { google } from 'googleapis'
+import express from 'express'
+import mongoose from "mongoose";
+import cors from 'cors'
+import bodyParser from "body-parser"
+import dotenv from "dotenv/config"
 
-const inventoryRoutes = require('./routes/inventory');
-const reportsRoutes = require('./routes/reports');
+// Import routes
+import inventoryRoutes from './routes/inventory.js'
+import reportsRoutes from './routes/reports.js'
+import preauthRoutes from "./routes/preauths.js"
 
-// Middlewres
-app.use(require('cors')())
-app.use(require('body-parser').json())
+const app = express()
+app.use(cors())
+app.use(bodyParser.json())
 
-
-// Routes
+// Use routes
 app.get('/', (req, res)=> res.send('Hello'))
 app.use('/inventory', inventoryRoutes)
 app.use('/reports', reportsRoutes)
+app.use('/preauths', preauthRoutes)
 
 
 
 
 // DB connection
-require('dotenv/config')
 mongoose.connect(process.env.DB_URL, (console.log("DB Connected")))
 
-//app.listen(3000,()=> console.log("Server Connected"))
+app.listen(3000,()=> console.log("Server Connected"))
 
-module.exports.api = functions.https.onRequest(app)
+//module.exports.api = functions.https.onRequest(app)

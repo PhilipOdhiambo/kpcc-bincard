@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DepartmentService } from './pages/deparmentModule/models/department.service';
 import { InventoryTransferService } from './services/inventory-transfer.service';
 
 @Component({
@@ -10,7 +11,10 @@ export class AppComponent {
 
   title = 'bincard-kpcc';
 
-  constructor(private transfers:InventoryTransferService) {
+  constructor(
+    private transfers:InventoryTransferService,
+    private department: DepartmentService
+    ) {
 
   }
 

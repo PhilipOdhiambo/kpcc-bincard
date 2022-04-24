@@ -3,8 +3,10 @@
     <table #table class="table">
       <thead style="position: sticky;top: -10px;background-color: rgb(226, 213, 213);">
         <tr>
+          <th>Date</th>
           <th>Issued To</th>
           <th>S11 No.</th>
+          <th>Code</th>
           <th>Item Description</th>
           <th>Quantity</th>
           <th>Unit cost</th>
@@ -13,8 +15,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let issue of issues">
+          <td>{{issue.date}}</td>
           <td>{{issue["Department Ordering"]}}</td>
           <td>{{issue["S11 No."]}}</td>
+          <td>{{issue.code}}</td>
           <td>{{issue.item}}</td>
           <td>{{issue.quantity}}</td>
           <td>{{issue.cost | currency :'' :'' : "0.2-2"}}</td>

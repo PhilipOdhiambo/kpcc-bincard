@@ -12,14 +12,18 @@ export class PreauthsComponent implements OnInit, OnDestroy {
   
   @ViewChild('input') searchInput: ElementRef;
   activePatient:PatientI
+  preauths:any[];
 
   constructor(
     public preauth$: PreauthService,
-    public patient$: PatientService
+    public patient$: PatientService,
+    private preauthService: PreauthService
   ) {
   }
 
   ngOnInit(): void {
+    this.preauthService.getpreauths()
+    .then((res:any) => this.preauths = res.data)
     
   }
 

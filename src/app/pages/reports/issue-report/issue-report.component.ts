@@ -27,6 +27,7 @@ export class IssueReportComponent implements OnInit {
       table.rows[0].cells.item(3).innerHTML,
       table.rows[0].cells.item(4).innerHTML,
       table.rows[0].cells.item(5).innerHTML,
+      table.rows[0].cells.item(6).innerHTML,
     ])
     // Add table rows
     for (let i = 1; i < numRows; i ++) {
@@ -35,8 +36,9 @@ export class IssueReportComponent implements OnInit {
         table.rows[i].cells.item(1).innerHTML,
         table.rows[i].cells.item(2).innerHTML,
         table.rows[i].cells.item(3).innerHTML,
-        parseFloat(parseFloat(table.rows[i].cells.item(4).innerText.replace(',','')).toFixed(2)),
+        table.rows[i].cells.item(4).innerHTML,
         parseFloat(parseFloat(table.rows[i].cells.item(5).innerText.replace(',','')).toFixed(2)),
+        parseFloat(parseFloat(table.rows[i].cells.item(6).innerText.replace(',','')).toFixed(2)),
       ])
     }
     let server = "https://us-central1-bincard-kpcc.cloudfunctions.net/api/reports/issues"

@@ -1,0 +1,23 @@
+
+<div class="container">
+  <h1 class="mb-4">Preauths</h1>
+  <div class="row">
+    <div class="col-md-6 form-field">
+      <label for="filter" class="form-label">Find Patient: </label>
+      <input id="filter" type="text" class="form-control" placeholder="filter by phone or name...">
+    </div>
+    <div class="col md-6">
+      <a href="/preauths/new" class="btn btn-success">New Preath</a>
+    </div>
+  </div> <!-- end row -->
+  <div *ngFor="let preauth of preauths" class="card mt-4">
+    <div class="card-body">
+      <h4 class="card-title">{{preauth.name}}</h4>
+      <div class="card-subtitle">Preauth Date: <span class="text-muted">{{preauth.date | date:"mediumDate"}}</span></div>
+      <div class="card-text mb-2">Tel: {{preauth.phone}}</div>
+    </div>
+    
+  </div>
+ 
+
+</div>

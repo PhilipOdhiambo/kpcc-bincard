@@ -43,9 +43,11 @@ export class InventoryService {
 
 
   getInventory() {
-    this.db.collection(this.collection).valueChanges().subscribe((result: any) => {
-      this.inventory$.next([...result[0].data])
-      this.inventory = result[0].data;
+
+    let url = "https://script.googleusercontent.com/macros/echo?user_content_key=HMvRLB-DRiAFowt4-NE8kDS65aCEi3rDrWWljCUteOKZ2K4cRwCv3zRqstVXeoq5hl2z5rYeKA6WALriwGO5OnMDcVVjRcglm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnHTjiQwldAG31FzHGs2vk5yndjcnq4uxZVj1NCvpFlKAUVaNrZaUdsgwxxl5NhqYLlmcxRjQQJsK1h4QzP0JxzvHhLkSQ-hd0Nz9Jw9Md8uu&lib=MehCzhhTITJFRiRvW1rM9d2Qekg880Chk"
+    this.http.get(url).subscribe((res:any) => {
+      this.inventory = res
+      this.inventory$.next([...res])
     })
   }
 

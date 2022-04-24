@@ -46,7 +46,9 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.deparmentService.department$.subscribe(departments => this.departments = departments);
+    //this.deparmentService.department$.subscribe(departments => this.departments = departments);
+    this.deparmentService.getDepartments().subscribe((depts:any) => this.departments = depts[0].data)
+
   }
 
 
@@ -67,14 +69,18 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
     res.forEach((range: any) => {
       range.data.forEach((order: InventoryTransferI) => {
         order.items.forEach((item: TransferDetailI) => {
+          // Get date
+          let timestamp:any = order.orderTime;
+          let dateStamp = new Date(order.orderTime)
           let temp:any = {
             "Department Ordering": order.departmentOrdering,
             "Department Issuing": order.departmentIssuing,
             "S11 No.": order.orderNumber,
+            code: item.code,
             item: item.description,
             cost: parseFloat(parseFloat(item.cost).toFixed(2)),
             quantity: parseInt(item.qtyOrdered),
-            date: order.orderTime         
+            date: dateStamp.toDateString()
           }
           temp.total = parseFloat((temp.cost * temp.quantity).toFixed(2))
           data.push(temp)

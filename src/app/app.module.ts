@@ -8,6 +8,8 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
+// Select2 for select dropdowns
+
 import { AppComponent } from './app.component';
 
 // Components
@@ -32,10 +34,13 @@ import { InventoryDetailComponent } from './pages/inventoryModule/components/inv
 import { InventoryAddComponent } from './pages/inventoryModule/components/inventory-add/inventory-add.component';
 import { InventoryTransferComponent } from './pages/inventory-transfer/inventory-transfer.component';
 import { IssueComponent } from './pages/inventory-transfer/issues/issue/issue.component';
-import { PreauthsComponent } from './pages/preauthModule/components/preauths/preauths.component';
+import { PreauthsComponent } from './preauthModule/components/preauths/preauths.component';
 import { ReceiptReportComponent } from './pages/reports/receipt-report/receipt-report.component';
 import { IssueReportComponent } from './pages/reports/issue-report/issue-report.component';
 import { RetrievalReportComponent } from './pages/reports/retrieval-report/retrieval-report.component';
+import { NewPreauthComponent } from './preauthModule/new-preauth/new-preauth.component';
+import { FormFieldsComponent } from './preauthModule/form-fields/form-fields.component';
+
 
 @NgModule({
   declarations: [
@@ -60,6 +65,8 @@ import { RetrievalReportComponent } from './pages/reports/retrieval-report/retri
     ReceiptReportComponent,
     IssueReportComponent,
     RetrievalReportComponent,
+    NewPreauthComponent,
+    FormFieldsComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +78,7 @@ import { RetrievalReportComponent } from './pages/reports/retrieval-report/retri
     AngularFirestoreModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

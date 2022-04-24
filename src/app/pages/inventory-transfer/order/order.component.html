@@ -10,42 +10,24 @@
 
     <form class="pt-3" [formGroup]="myForm" autocomplete="off">
         <div class="head">
-            <label class="form-label me-4"> Department Ordering:
-                <div class="input-field">
-                    <input #deptOrdering class="form-control" type="text"
-                        (input)="getDepartmentOrdering($event)"
-                        (blur)="blurDepartmentInputs($event)"
-                        formControlName="departmentOrdering"
-                        [(ngModel)]="deptOrdering.value"
-                        placeholder="Start typing to find...">
-                    <div class="dropdown">
-                        <p class="my-1 ms-1" *ngFor="let d of
-                            departmentsOrdering"
-                            (click)="deptOrdering.value=d.unitName;
-                            departmentsOrdering=[]">
+            <div class="row mb-4">
+                <div class="col-4">
+                    <label>To (ISSUE POINT):</label>
+                    <select [(ngModel)]="deptIssuing.value" #deptIssuing formControlName="departmentIssuing" id="departmentIssuing" class="form-control">
+                        <option *ngFor="let d of departments" value="{{d.unitName}}">
                             {{d.unitName}}
-                        </p>
-                    </div>
+                        </option>
+                    </select>
                 </div>
-            </label>
-            <label class="form-label me-4"> Department Issuing:
-                <div class="input-field">
-                    <input #deptIssuing class="form-control" type="text"
-                        (input)="getDepartmentIssuing($event)"
-                        (blur)="blurDepartmentInputs($event)"
-                        formControlName="departmentIssuing"
-                        [(ngModel)]="deptIssuing.value"
-                        placeholder="Start typing to find...">
-                    <div class="dropdown">
-                        <p class="my-1 ms-1" *ngFor="let d of
-                            departmentsIssuing"
-                            (click)="deptIssuing.value=d.unitName;
-                            departmentsIssuing=[]">
+                <div class="col-4">
+                    <label>Department Ordering(point of use):</label>
+                    <select [(ngModel)]="deptOrdering.value" #deptOrdering formControlName="departmentOrdering" id="departmentOrdering" class="form-control">
+                        <option *ngFor="let d of departments" value="{{d.unitName}}">
                             {{d.unitName}}
-                        </p>
-                    </div>
+                        </option>
+                    </select>
                 </div>
-            </label>
+            </div> <!-- end row -->
 
             <label class="me-2"> S11 No.:
                 <input class="form-control" formControlName="orderNumber"
@@ -53,6 +35,8 @@
             </label>
             <label style="margin-left:1rem">Date:
                 <input class="form-control" id="date" #date type="date"
+                    placeholder="dd-mm-yyyy" value=""
+                    min="1997-01-01" max="2030-12-31"
                     formControlName="orderTime">
             </label>
 
@@ -73,7 +57,8 @@
                         </p>
                         <p *ngIf="!drugs.length && drugSearch.value">
                             This item does not exist:
-                            <a class="btn btn-info" href="/inventory" target="_blank">
+                            <a class="btn btn-info" href="/inventory"
+                                target="_blank">
                                 Add it to Inventory
                             </a>
                         </p>
@@ -144,3 +129,10 @@
 
     </form>
 </div>
+
+<script>
+        // In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+</script>

@@ -1,10 +1,12 @@
 
 
-const route = require('express').Router()
+import express from 'express'
 
-route.get('/', (req, res) => {
+const router = express.Router()
+
+router.get('/', (req, res) => {
   res.send("inventory")
 })
 
 
-module.exports = route
+export default router

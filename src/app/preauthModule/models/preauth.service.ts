@@ -15,8 +15,8 @@ export class PreauthService {
 
   }
 
-  getpreauths() {
-    this.http.get("assets/preauth.data.json")
-    .subscribe((res:any) => this.preauths.next(res[0].data) )
+  async getpreauths() {
+    return await this.http.get("http://localhost:3000/preauths").toPromise()
+    
   }
 }

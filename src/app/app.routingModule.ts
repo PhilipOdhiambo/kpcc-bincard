@@ -10,7 +10,8 @@ import { IssuesComponent } from './pages/inventory-transfer/issues/issues.compon
 import { ReportsComponent } from './pages/reports/reports.component';
 import { DepartmentComponent } from './pages/deparmentModule/components/department/department.component';
 import { InventoryComponent } from './pages/inventoryModule/components/inventory/inventory.component';
-import { PreauthsComponent } from './pages/preauthModule/components/preauths/preauths.component';
+import { PreauthsComponent } from './preauthModule/components/preauths/preauths.component';
+import { NewPreauthComponent } from './preauthModule/new-preauth/new-preauth.component';
 
 const routes:Routes = [   
     {path:'home', component: HomePageComponent },
@@ -20,6 +21,7 @@ const routes:Routes = [
     { path: 'departments', component: DepartmentComponent},
     { path: 'inventory', component: InventoryComponent},
     {path: 'preauths', component: PreauthsComponent},
+    {path: 'preauths/new', component: NewPreauthComponent},
     { path: '**', redirectTo:'home', pathMatch: 'full'}
 ];
 

@@ -37,7 +37,7 @@ export class InventoryAddComponent implements OnInit {
 
   addNewInventory(myform: NgForm) {
 
-    if (myform.valid && this.duplicateCode==false) {
+    if (myform.valid) {
       let inventory:InventoryI = {
         code: this.newInventory.code, 
         buying: this.newInventory.buying, 

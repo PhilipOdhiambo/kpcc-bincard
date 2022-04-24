@@ -1,7 +1,9 @@
 
-const route = require('express').Router()
-const {google} = require("googleapis");
-const googleKey = require('../google-api-key.json')
+import express from 'express'
+import {google} from 'googleapis'
+import  googleKey from '../google-api-key.js'
+
+const route = express.Router()
 
 // Google client
 const auth = new google.auth.GoogleAuth({
@@ -11,7 +13,7 @@ const auth = new google.auth.GoogleAuth({
 
 // Create create google sheets api
 const gsApi = google.sheets({version:"v4",auth})
-spreadsheetId = '1hWsRZteWKPMZ3v944LtMD7Qc_11Gs28__yE-AxqJKF0'
+const spreadsheetId = '1hWsRZteWKPMZ3v944LtMD7Qc_11Gs28__yE-AxqJKF0'
 
 
 route.get('/', (req, res) => res.send("Get Reports"))
@@ -44,4 +46,4 @@ route.post('/issues', async (req, res) => {
 })
 
 
-module.exports = route
+export default route

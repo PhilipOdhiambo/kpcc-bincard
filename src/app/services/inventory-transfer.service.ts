@@ -18,8 +18,9 @@ export class InventoryTransferService {
 
 
   createTransfer(transfer: InventoryTransferI) {
-    transfer.orderTime = new Date()
-    let yearMonth = transfer.orderTime.getFullYear().toString() + "-" + (transfer.orderTime.getMonth() + 1).toString()
+    let orderDate = new Date(transfer.orderTime)
+    let yearMonth = orderDate.getFullYear() + "-" + (orderDate.getMonth() + 1)
+    console.log(yearMonth)
     let fsTransfer = { data: [] }
     let fsDocument: AngularFirestoreDocument = this.fsDb.collection(this.collection).doc(yearMonth);
     return fsDocument.get().toPromise().then(doc => {
